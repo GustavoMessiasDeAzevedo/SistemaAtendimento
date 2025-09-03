@@ -545,6 +545,7 @@
             Controls.Add(grbDadosCliente);
             Name = "FrmCadastroCliente";
             Text = "Cadastro de Cliente";
+            Load += FrmCadastroCliente_Load;
             grbDadosCliente.ResumeLayout(false);
             grbDadosCliente.PerformLayout();
             pnlSituacao.ResumeLayout(false);

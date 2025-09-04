@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using SistemaAtendimento.Model;
 using SistemaAtendimento.Repositories;
 
 namespace SistemaAtendimento.Controller
@@ -32,6 +33,12 @@ namespace SistemaAtendimento.Controller
             var listaClientes = _clienteRepository.Listar();
 
             _frmCadastroCliente.ExibirClientes(listaClientes);
+        }
+
+        public void AdiconarClientes(Clientes cliente) 
+        {
+            _clienteRepository.Adicionar(cliente);
+            MessageBox.Show("Cliente adicionado com sucesso!");
         }
     }
 }

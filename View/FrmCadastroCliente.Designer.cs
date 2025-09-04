@@ -423,6 +423,7 @@
             btnNovo.TabIndex = 13;
             btnNovo.Text = "Novo";
             btnNovo.UseVisualStyleBackColor = true;
+            btnNovo.Click += btnNovo_Click;
             // 
             // imlIcones
             // 

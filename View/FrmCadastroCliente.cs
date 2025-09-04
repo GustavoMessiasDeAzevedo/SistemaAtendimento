@@ -26,7 +26,10 @@ namespace SistemaAtendimento
         {
             _clienteController.ListarClientes();
         }
-
+        public void ExibirMensagem(string mensagem) 
+        { 
+            MessageBox.Show(mensagem);
+        }
         public void ExibirClientes(List<Clientes> clientes) 
         { 
             dgvCliente.DataSource = clientes;

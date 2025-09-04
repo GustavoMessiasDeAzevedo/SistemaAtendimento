@@ -7,14 +7,28 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using SistemaAtendimento.Controller;
+using SistemaAtendimento.Model;
 
 namespace SistemaAtendimento.View
 {
     public partial class FrmCadastroSituacaoAtendimento : Form
     {
+        private SituacaoClienteController _situacaoClienteController;
         public FrmCadastroSituacaoAtendimento()
         {
             InitializeComponent();
+            _situacaoClienteController = new SituacaoClienteController(this);
+        }
+
+        private void FrmCadastroSituacaoAtendimento_Load(object sender, EventArgs e)
+        {
+            _situacaoClienteController.ListarSitucao();
+        }
+
+        public void ExibirSituacoes(List<SituacaoAtendimento> SituacaoAtendimento) 
+        { 
+            dgvSituacaoAtendimento.DataSource = SituacaoAtendimento;
         }
     }
 }

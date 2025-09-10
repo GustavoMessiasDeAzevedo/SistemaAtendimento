@@ -38,6 +38,11 @@ namespace SistemaAtendimento
 
         private void btnNovo_Click(object sender, EventArgs e)
         {
+           
+        }
+
+        private void btnSalvar_Click(object sender, EventArgs e)
+        {
             Clientes cliente = new Clientes()
             {
                 nome = txtNome.Text,
@@ -56,7 +61,7 @@ namespace SistemaAtendimento
                 ativo = rdbAtivo.Checked
             };
 
-            _clienteController.AdiconarClientes(cliente);
+            _clienteController.InserirClientes(cliente);
 
             _clienteController.ListarClientes();
         }

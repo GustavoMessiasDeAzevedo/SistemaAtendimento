@@ -41,5 +41,23 @@ namespace SistemaAtendimento.Repositories
             }
                 return usuarios;
         }
+
+        public void Inserir(Usuarios usuario)
+        {
+            using (var conexao = ConexaoDB.GetConexao())
+            {
+                string sql = @"INSERT INTO usuarios (nome, email, senha, perfil) 
+                               VALUES (@nome, @email, @senha, @perfil)";
+                using (var comando = new SqlCommand(sql, conexao))
+                {
+                    comando.Parameters.AddWithValue("@nome", usuario.Nome);
+                    comando.Parameters.AddWithValue("@email", usuario.Email);
+                    comando.Parameters.AddWithValue("@senha", usuario.Senha);
+                    comando.Parameters.AddWithValue("@perfil", usuario.Perfil);
+                    conexao.Open();
+                    comando.ExecuteNonQuery();
+                }
+            }
+        }
     }
 }

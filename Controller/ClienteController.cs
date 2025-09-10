@@ -35,9 +35,9 @@ namespace SistemaAtendimento.Controller
             _frmCadastroCliente.ExibirClientes(listaClientes);
         }
 
-        public void AdiconarClientes(Clientes cliente) 
+        public void InserirClientes(Clientes cliente) 
         {
-            _clienteRepository.Adicionar(cliente);
+            _clienteRepository.Inserir(cliente);
             MessageBox.Show("Cliente adicionado com sucesso!");
         }
     }

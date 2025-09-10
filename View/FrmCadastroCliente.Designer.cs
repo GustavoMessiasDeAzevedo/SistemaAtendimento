@@ -423,7 +423,6 @@
             btnNovo.TabIndex = 13;
             btnNovo.Text = "Novo";
             btnNovo.UseVisualStyleBackColor = true;
-            btnNovo.Click += btnNovo_Click;
             // 
             // imlIcones
             // 
@@ -460,6 +459,7 @@
             btnSalvar.TabIndex = 15;
             btnSalvar.Text = "Salvar";
             btnSalvar.UseVisualStyleBackColor = true;
+            btnSalvar.Click += btnSalvar_Click;
             // 
             // btnExcluir
             // 

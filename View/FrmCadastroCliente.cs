@@ -36,19 +36,14 @@ namespace SistemaAtendimento
 
         }
 
-        private void btnNovo_Click(object sender, EventArgs e)
-        {
-           
-        }
-
         private void btnSalvar_Click(object sender, EventArgs e)
         {
-            Clientes cliente = new Clientes()
+            Clientes cliente = new Clientes
             {
                 nome = txtNome.Text,
                 email = txtEmail.Text,
                 cpf_cnpj = txtCpfCnpj.Text,
-                tipo_pessoa = rdbFisica.Text,
+                tipo_pessoa = (rdbFisica.Checked) ? "F" : "J",
                 telefone = txtTelefone.Text,
                 celular = txtCelular.Text,
                 cep = txtCep.Text,
@@ -61,9 +56,81 @@ namespace SistemaAtendimento
                 ativo = rdbAtivo.Checked
             };
 
-            _clienteController.InserirClientes(cliente);
+            if (!ValidarDados(cliente))
+                return;
 
-            _clienteController.ListarClientes();
+            _clienteController.Salvar(cliente);
+        }
+
+        public bool ValidarDados(Clientes cliente) 
+        {
+            if (string.IsNullOrWhiteSpace(cliente.nome))
+            {
+                ExibirMensagem("O campo Nome é obrigatório.");
+                txtNome.Focus();
+                return false;
+            }
+
+            if (string.IsNullOrWhiteSpace(cliente.email))
+            {
+                ExibirMensagem("O campo Email é obrigatório.");
+                txtEmail.Focus();
+                return false;
+            }
+
+            if (string.IsNullOrWhiteSpace(cliente.cpf_cnpj))
+            {
+                
+                if(rdbFisica.Checked)
+                    ExibirMensagem("O campo CPF é obrigatório.");
+                    
+                else
+                    ExibirMensagem("O campo CNPJ é obrigatório.");
+                    txtCpfCnpj.Focus();
+                    return false;
+
+                
+                
+            }
+
+            if (string.IsNullOrWhiteSpace(cliente.cep))
+            {
+                ExibirMensagem("O campo CEP é obrigatório.");
+                txtCep.Focus();
+                return false;
+            }
+            if (string.IsNullOrWhiteSpace(cliente.endereco))
+            {
+                ExibirMensagem("O campo Endereço é obrigatório.");
+                txtEndereco.Focus();
+                return false;
+            }
+            if (string.IsNullOrWhiteSpace(cliente.numero))
+            {
+                ExibirMensagem("O campo Número é obrigatório.");
+                txtNumero.Focus();
+                return false;
+            }
+
+            if (string.IsNullOrWhiteSpace(cliente.bairro))
+            {
+                ExibirMensagem("O campo Bairro é obrigatório.");
+                txtBairro.Focus();
+                return false;
+            }
+            if (string.IsNullOrWhiteSpace(cliente.cidade))
+            {
+                ExibirMensagem("O campo Cidade é obrigatório.");
+                txtCidade.Focus();
+                return false;
+            }
+            if (string.IsNullOrWhiteSpace(cliente.estado))
+            {
+                ExibirMensagem("O campo Estado é obrigatório.");
+                cbxEstado.Focus();
+                return false;
+            }
+            return true;
         }
     }
 }

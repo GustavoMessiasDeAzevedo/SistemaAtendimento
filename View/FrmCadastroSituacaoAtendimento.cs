@@ -26,9 +26,26 @@ namespace SistemaAtendimento.View
             _situacaoClienteController.ListarSitucao();
         }
 
-        public void ExibirSituacoes(List<SituacaoAtendimento> SituacaoAtendimento) 
-        { 
+        public void ExibirMensagem(string mensagem)
+        {
+            MessageBox.Show(mensagem);
+        }
+
+        public void ExibirSituacoes(List<SituacaoAtendimento> SituacaoAtendimento)
+        {
             dgvSituacaoAtendimento.DataSource = SituacaoAtendimento;
+        }
+
+        private void btnSalvar_Click(object sender, EventArgs e)
+        {
+            SituacaoAtendimento situacaoAtendimento = new SituacaoAtendimento
+            {
+                nome = txtNome.Text,
+                cor = txtCor.Text,
+                Ativo = rdbAtivo.Checked
+            };
+
+            _situacaoClienteController.Salvar(situacaoAtendimento);
         }
     }
 }

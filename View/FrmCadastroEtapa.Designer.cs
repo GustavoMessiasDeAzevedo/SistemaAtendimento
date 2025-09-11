@@ -35,9 +35,9 @@
             pnlSituacao = new Panel();
             rdbInativo = new RadioButton();
             rdbAtivo = new RadioButton();
-            textBox2 = new TextBox();
+            txtOrdem = new TextBox();
             lblOrdem = new Label();
-            textBox1 = new TextBox();
+            txtNome = new TextBox();
             lblNome = new Label();
             txtCodigo = new TextBox();
             lblCódigo = new Label();
@@ -62,9 +62,9 @@
             // 
             grbCadastroDeEtapa.Controls.Add(lblSituacao);
             grbCadastroDeEtapa.Controls.Add(pnlSituacao);
-            grbCadastroDeEtapa.Controls.Add(textBox2);
+            grbCadastroDeEtapa.Controls.Add(txtOrdem);
             grbCadastroDeEtapa.Controls.Add(lblOrdem);
-            grbCadastroDeEtapa.Controls.Add(textBox1);
+            grbCadastroDeEtapa.Controls.Add(txtNome);
             grbCadastroDeEtapa.Controls.Add(lblNome);
             grbCadastroDeEtapa.Controls.Add(txtCodigo);
             grbCadastroDeEtapa.Controls.Add(lblCódigo);
@@ -107,6 +107,7 @@
             // rdbAtivo
             // 
             rdbAtivo.AutoSize = true;
+            rdbAtivo.Checked = true;
             rdbAtivo.Location = new Point(8, 8);
             rdbAtivo.Name = "rdbAtivo";
             rdbAtivo.Size = new Size(53, 19);
@@ -115,12 +116,12 @@
             rdbAtivo.Text = "Ativo";
             rdbAtivo.UseVisualStyleBackColor = true;
             // 
-            // textBox2
+            // txtOrdem
             // 
-            textBox2.Location = new Point(8, 96);
-            textBox2.Name = "textBox2";
-            textBox2.Size = new Size(256, 23);
-            textBox2.TabIndex = 5;
+            txtOrdem.Location = new Point(8, 96);
+            txtOrdem.Name = "txtOrdem";
+            txtOrdem.Size = new Size(256, 23);
+            txtOrdem.TabIndex = 5;
             // 
             // lblOrdem
             // 
@@ -131,12 +132,12 @@
             lblOrdem.TabIndex = 4;
             lblOrdem.Text = "Ordem";
             // 
-            // textBox1
+            // txtNome
             // 
-            textBox1.Location = new Point(128, 40);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(440, 23);
-            textBox1.TabIndex = 3;
+            txtNome.Location = new Point(128, 40);
+            txtNome.Name = "txtNome";
+            txtNome.Size = new Size(440, 23);
+            txtNome.TabIndex = 3;
             // 
             // lblNome
             // 
@@ -248,6 +249,7 @@
             btnSalvar.TabIndex = 31;
             btnSalvar.Text = "Salvar";
             btnSalvar.UseVisualStyleBackColor = true;
+            btnSalvar.Click += btnSalvar_Click;
             // 
             // btnNovo
             // 
@@ -311,12 +313,12 @@
 
         private GroupBox grbCadastroDeEtapa;
         private Label lblOrdem;
-        private TextBox textBox1;
+        private TextBox txtNome;
         private Label lblNome;
         private TextBox txtCodigo;
         private Label lblCódigo;
         private Panel pnlSituacao;
-        private TextBox textBox2;
+        private TextBox txtOrdem;
         private Label lblSituacao;
         private RadioButton rdbInativo;
         private RadioButton rdbAtivo;

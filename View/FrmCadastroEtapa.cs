@@ -26,10 +26,26 @@ namespace SistemaAtendimento.View
         {
             _etapaController.ListarEtapas();
         }
+        public void ExibirMensagem(string mensagem)
+        {
+            MessageBox.Show(mensagem);
+        }
 
-        public void ExibirEtapas(List<Etapas> Etapas) 
-        { 
+        public void ExibirEtapas(List<Etapas> Etapas)
+        {
             dgvEtapa.DataSource = Etapas;
+        }
+
+        private void btnSalvar_Click(object sender, EventArgs e)
+        {
+            Etapas etapa = new Etapas
+            {
+                nome = txtNome.Text,
+                ordem = txtOrdem.Text != "" ? Convert.ToInt32(txtOrdem.Text) : 0,
+                Ativo = rdbAtivo.Checked
+            };
+
+            _etapaController.Salvar(etapa);
         }
     }
 }

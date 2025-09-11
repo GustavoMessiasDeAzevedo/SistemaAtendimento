@@ -172,13 +172,13 @@
             rdbInativo.Name = "rdbInativo";
             rdbInativo.Size = new Size(61, 19);
             rdbInativo.TabIndex = 1;
-            rdbInativo.TabStop = true;
             rdbInativo.Text = "Inativo";
             rdbInativo.UseVisualStyleBackColor = true;
             // 
             // rdbAtivo
             // 
             rdbAtivo.AutoSize = true;
+            rdbAtivo.Checked = true;
             rdbAtivo.Location = new Point(8, 8);
             rdbAtivo.Name = "rdbAtivo";
             rdbAtivo.Size = new Size(53, 19);
@@ -324,13 +324,13 @@
             rdbJuridica.Name = "rdbJuridica";
             rdbJuridica.Size = new Size(65, 19);
             rdbJuridica.TabIndex = 1;
-            rdbJuridica.TabStop = true;
             rdbJuridica.Text = "Jurídica";
             rdbJuridica.UseVisualStyleBackColor = true;
             // 
             // rdbFisica
             // 
             rdbFisica.AutoSize = true;
+            rdbFisica.Checked = true;
             rdbFisica.Location = new Point(8, 8);
             rdbFisica.Name = "rdbFisica";
             rdbFisica.Size = new Size(54, 19);
@@ -400,6 +400,7 @@
             // 
             txtCodigo.Location = new Point(16, 40);
             txtCodigo.Name = "txtCodigo";
+            txtCodigo.ReadOnly = true;
             txtCodigo.Size = new Size(100, 23);
             txtCodigo.TabIndex = 0;
             // 

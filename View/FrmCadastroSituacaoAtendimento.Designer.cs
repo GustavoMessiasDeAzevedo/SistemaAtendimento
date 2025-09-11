@@ -35,7 +35,7 @@
             pnlSituacao = new Panel();
             rdbInativo = new RadioButton();
             rdbAtivo = new RadioButton();
-            textBox1 = new TextBox();
+            txtCor = new TextBox();
             lblCor = new Label();
             txtNome = new TextBox();
             lblNome = new Label();
@@ -62,7 +62,7 @@
             // 
             groupBox1.Controls.Add(lblSituacao);
             groupBox1.Controls.Add(pnlSituacao);
-            groupBox1.Controls.Add(textBox1);
+            groupBox1.Controls.Add(txtCor);
             groupBox1.Controls.Add(lblCor);
             groupBox1.Controls.Add(txtNome);
             groupBox1.Controls.Add(lblNome);
@@ -100,13 +100,13 @@
             rdbInativo.Name = "rdbInativo";
             rdbInativo.Size = new Size(61, 19);
             rdbInativo.TabIndex = 1;
-            rdbInativo.TabStop = true;
             rdbInativo.Text = "Inativo";
             rdbInativo.UseVisualStyleBackColor = true;
             // 
             // rdbAtivo
             // 
             rdbAtivo.AutoSize = true;
+            rdbAtivo.Checked = true;
             rdbAtivo.Location = new Point(8, 8);
             rdbAtivo.Name = "rdbAtivo";
             rdbAtivo.Size = new Size(53, 19);
@@ -115,12 +115,12 @@
             rdbAtivo.Text = "Ativo";
             rdbAtivo.UseVisualStyleBackColor = true;
             // 
-            // textBox1
+            // txtCor
             // 
-            textBox1.Location = new Point(8, 96);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(264, 23);
-            textBox1.TabIndex = 5;
+            txtCor.Location = new Point(8, 96);
+            txtCor.Name = "txtCor";
+            txtCor.Size = new Size(264, 23);
+            txtCor.TabIndex = 5;
             // 
             // lblCor
             // 
@@ -248,6 +248,7 @@
             btnSalvar.TabIndex = 39;
             btnSalvar.Text = "Salvar";
             btnSalvar.UseVisualStyleBackColor = true;
+            btnSalvar.Click += btnSalvar_Click;
             // 
             // btnNovo
             // 
@@ -311,7 +312,7 @@
 
         private GroupBox groupBox1;
         private Panel pnlSituacao;
-        private TextBox textBox1;
+        private TextBox txtCor;
         private Label lblCor;
         private TextBox txtNome;
         private Label lblNome;

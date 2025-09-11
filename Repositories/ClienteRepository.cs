@@ -57,7 +57,7 @@ namespace SistemaAtendimento.Repositories
         { 
             using(var conexao = ConexaoDB.GetConexao())
             {
-                string sql = @"INSERT INTO clientes (nome, email, cpf_cnpj, tipo_pessoa, telefone, celular, cep, endereco, numero, complemento, bairro, cidade, estado, ativo);
+                string sql = @"INSERT INTO clientes (nome, email, cpf_cnpj, tipo_pessoa, telefone, celular, cep, endereco, numero, complemento, bairro, cidade, estado, ativo)
                                  VALUES (@nome, @email, @cpf_cnpj, @tipo_pessoa, @telefone, @celular, @cep, @endereco, @numero, @complemento, @bairro, @cidade, @estado, @ativo)";
 
 

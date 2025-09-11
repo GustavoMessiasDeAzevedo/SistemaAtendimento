@@ -26,9 +26,28 @@ namespace SistemaAtendimento.View
             _usuarioController.ListarUsuarios();
         }
 
+        public void ExibirMensagem(string mensagem)
+        {
+            MessageBox.Show(mensagem);
+        }
+
         public void ExibirUsuarios(List<Usuarios> usuarios)
         {
             dgvUsuario.DataSource = usuarios;
+        }
+
+        private void btnSalvar_Click(object sender, EventArgs e)
+        {
+            Usuarios usuario = new Usuarios
+            {
+                Nome = txtNome.Text,
+                Email = txtEmail.Text,
+                Senha = txtSenha.Text,
+                Perfil = cbxPerfil.Text
+
+            };
+
+            _usuarioController.Salvar(usuario);
         }
     }
 }

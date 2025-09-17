@@ -60,9 +60,10 @@ namespace SistemaAtendimento
                 return;
 
             _clienteController.Salvar(cliente);
+            DesabilitarCampos();
         }
 
-        public bool ValidarDados(Clientes cliente) 
+        public bool ValidarDados(Clientes cliente)
         {
             if (string.IsNullOrWhiteSpace(cliente.nome))
             {
@@ -80,17 +81,26 @@ namespace SistemaAtendimento
 
             if (string.IsNullOrWhiteSpace(cliente.cpf_cnpj))
             {
-                
-                if(rdbFisica.Checked)
+
+                if (rdbFisica.Checked)
                     ExibirMensagem("O campo CPF é obrigatório.");
-                    
+
                 else
                     ExibirMensagem("O campo CNPJ é obrigatório.");
-                    txtCpfCnpj.Focus();
-                    return false;
 
-                
-                
+                txtCpfCnpj.Focus();
+                return false;
+            }
+            else
+            {
+                if (rdbFisica.Checked)
+                {
+                    if (ValidarCPF() == false)
+                    {
+                        ExibirMensagem("CPF inválido");
+                        return false;
+                    }
+                }
             }
 
             if (string.IsNullOrWhiteSpace(cliente.cep))
@@ -132,5 +142,148 @@ namespace SistemaAtendimento
             }
             return true;
         }
+
+        private void rdbJuridica_CheckedChanged(object sender, EventArgs e)
+        {
+            lblCpfCnpj.Text = "CNPJ";
+        }
+
+        private void rdbFisica_CheckedChanged(object sender, EventArgs e)
+        {
+            lblCpfCnpj.Text = "CPF";
+        }
+
+
+
+        public bool ValidarCPF()
+        {
+            int[] numeroCPF = new int[11];
+
+            for (int i = 0; i < 11; i++)
+            {
+                numeroCPF[i] = int.Parse(txtCpfCnpj.Text[i].ToString());
+            }
+
+            //1° Digito
+            int soma = 0;
+            for (int i = 0; i < 9; i++)
+            {
+                soma += numeroCPF[i] * (10 - i);
+            }
+            int resultado = soma % 11;
+            if (resultado < 2)
+            {
+                numeroCPF[9] = 0;
+            }
+            else
+            {
+                numeroCPF[9] = 11 - resultado;
+            }
+
+            //2° Digito
+
+            soma = 0;
+            for (int i = 0; i < 10; i++)
+            {
+                soma += numeroCPF[i] * (11 - i);
+            }
+            resultado = soma % 11;
+            if (resultado < 2)
+            {
+                numeroCPF[10] = 0;
+            }
+            else
+            {
+                numeroCPF[10] = 11 - resultado;
+            }
+            if (numeroCPF[9] == int.Parse(txtCpfCnpj.Text[9].ToString()) && numeroCPF[10] == int.Parse(txtCpfCnpj.Text[10].ToString()))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        private void btnNovo_Click(object sender, EventArgs e)
+        {
+            HabilitarCampos();
+        }
+
+
+        private void HabilitarCampos()
+        {
+            txtNome.ReadOnly = false;
+            txtEmail.ReadOnly = false;
+            txtCpfCnpj.ReadOnly = false;
+            pnlTipoPessoa.Enabled = true;
+            txtTelefone.ReadOnly = false;
+            txtTelefone.ReadOnly = false;
+            txtCelular.ReadOnly = false;
+            txtCep.ReadOnly = false;
+            txtEndereco.ReadOnly = false;
+            txtNumero.ReadOnly = false;
+            txtComplemento.ReadOnly = false;
+            txtBairro.ReadOnly = false;
+            txtCidade.ReadOnly = false;
+            cbxEstado.Enabled = true;
+            pnlSituacao.Enabled = true;
+
+            btnSalvar.Enabled = true;
+            btnCancelar.Enabled = true;
+            btnNovo.Enabled = false;
+        }
+
+        private void LimparCampos()
+        {
+            txtNome.Clear();
+            txtEmail.Clear();
+            txtCpfCnpj.Clear();
+            rdbFisica.Checked = true;
+            txtTelefone.Clear();
+            txtCelular.Clear();
+            txtCep.Clear();
+            txtEndereco.Clear();
+            txtNumero.Clear();
+            txtComplemento.Clear();
+            txtBairro.Clear();
+            txtCidade.Clear();
+            cbxEstado.SelectedIndex = -1;
+            rdbAtivo.Checked = true;
+        }
+
+        public void DesabilitarCampos()
+        {
+            LimparCampos();
+            txtNome.ReadOnly = true;
+            txtEmail.ReadOnly = true;
+            txtCpfCnpj.ReadOnly = true;
+            pnlTipoPessoa.Enabled = false;
+            txtTelefone.ReadOnly = true;
+            txtTelefone.ReadOnly = true;
+            txtCelular.ReadOnly = true;
+            txtCep.ReadOnly = true;
+            txtEndereco.ReadOnly = true;
+            txtNumero.ReadOnly = true;
+            txtComplemento.ReadOnly = true;
+            txtBairro.ReadOnly = true;
+            txtCidade.ReadOnly = true;
+            cbxEstado.Enabled = true;
+            pnlSituacao.Enabled = true;
+
+            btnSalvar.Enabled = false;
+            btnCancelar.Enabled = false;
+            btnExcluir.Enabled = false;
+            btnExcluir.Enabled = false; 
+            btnNovo.Enabled = true;
+        }
+
+        private void btnCancelar_Click(object sender, EventArgs e)
+        {
+            
+            DesabilitarCampos();
+        }
     }
+
 }

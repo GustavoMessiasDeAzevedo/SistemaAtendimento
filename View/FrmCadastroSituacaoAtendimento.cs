@@ -46,6 +46,48 @@ namespace SistemaAtendimento.View
             };
 
             _situacaoClienteController.Salvar(situacaoAtendimento);
+            DesabilitarCampos();
+        }
+
+        private void btnNovo_Click(object sender, EventArgs e)
+        {
+            HabilitarCampos();
+        }
+
+        private void HabilitarCampos()
+        {
+            txtNome.ReadOnly = false;
+            txtCor.ReadOnly = false;
+            pnlSituacao.Enabled = true;
+            btnCancelar.Enabled = true;
+            btnSalvar.Enabled = true;
+            btnNovo.Enabled = false;
+        }
+
+        private void LimparCampos()
+        {
+            txtNome.Clear();
+            txtCor.Clear();
+            rdbAtivo.Checked = true;
+        }
+
+        public void DesabilitarCampos()
+        {
+            LimparCampos();
+            txtNome.ReadOnly = true;
+            txtCor.ReadOnly = true;
+            pnlSituacao.Enabled = false;
+            btnCancelar.Enabled = false;
+            btnSalvar.Enabled = false;
+            btnExcluir.Enabled = false;
+            btnEditar.Enabled = false;
+            btnNovo.Enabled = true;
+
+        }
+
+        private void btnCancelar_Click(object sender, EventArgs e)
+        {
+            DesabilitarCampos();
         }
     }
 }

@@ -126,6 +126,7 @@
             // 
             txtEmail.Location = new Point(432, 40);
             txtEmail.Name = "txtEmail";
+            txtEmail.ReadOnly = true;
             txtEmail.Size = new Size(344, 23);
             txtEmail.TabIndex = 2;
             // 
@@ -140,6 +141,7 @@
             // 
             // cbxEstado
             // 
+            cbxEstado.Enabled = false;
             cbxEstado.FormattingEnabled = true;
             cbxEstado.Items.AddRange(new object[] { "AC", "AL", "AP", "AM", "BA", "CE", "DF", "ES", "GO", "MA", "MS", "MT", "MG", "PA", "PB", "PR", "PE", "PI", "RJ", "RN", "RS", "RO", "RR", "SC", "SP", "SE", "TO" });
             cbxEstado.Location = new Point(16, 264);
@@ -160,6 +162,7 @@
             // 
             pnlSituacao.Controls.Add(rdbInativo);
             pnlSituacao.Controls.Add(rdbAtivo);
+            pnlSituacao.Enabled = false;
             pnlSituacao.Location = new Point(200, 256);
             pnlSituacao.Name = "pnlSituacao";
             pnlSituacao.Size = new Size(136, 32);
@@ -209,6 +212,7 @@
             // 
             txtComplemento.Location = new Point(272, 208);
             txtComplemento.Name = "txtComplemento";
+            txtComplemento.ReadOnly = true;
             txtComplemento.Size = new Size(240, 23);
             txtComplemento.TabIndex = 10;
             // 
@@ -225,6 +229,7 @@
             // 
             txtCidade.Location = new Point(528, 208);
             txtCidade.Name = "txtCidade";
+            txtCidade.ReadOnly = true;
             txtCidade.Size = new Size(248, 23);
             txtCidade.TabIndex = 11;
             // 
@@ -232,6 +237,7 @@
             // 
             txtBairro.Location = new Point(16, 208);
             txtBairro.Name = "txtBairro";
+            txtBairro.ReadOnly = true;
             txtBairro.Size = new Size(240, 23);
             txtBairro.TabIndex = 9;
             // 
@@ -257,6 +263,7 @@
             // 
             txtNumero.Location = new Point(608, 152);
             txtNumero.Name = "txtNumero";
+            txtNumero.ReadOnly = true;
             txtNumero.Size = new Size(168, 23);
             txtNumero.TabIndex = 8;
             // 
@@ -264,6 +271,7 @@
             // 
             txtEndereco.Location = new Point(200, 152);
             txtEndereco.Name = "txtEndereco";
+            txtEndereco.ReadOnly = true;
             txtEndereco.Size = new Size(392, 23);
             txtEndereco.TabIndex = 7;
             // 
@@ -280,6 +288,7 @@
             // 
             txtCep.Location = new Point(16, 152);
             txtCep.Name = "txtCep";
+            txtCep.ReadOnly = true;
             txtCep.Size = new Size(168, 23);
             txtCep.TabIndex = 6;
             // 
@@ -296,6 +305,7 @@
             // 
             txtCpfCnpj.Location = new Point(552, 96);
             txtCpfCnpj.Name = "txtCpfCnpj";
+            txtCpfCnpj.ReadOnly = true;
             txtCpfCnpj.Size = new Size(224, 23);
             txtCpfCnpj.TabIndex = 5;
             // 
@@ -304,14 +314,15 @@
             lblCpfCnpj.AutoSize = true;
             lblCpfCnpj.Location = new Point(552, 80);
             lblCpfCnpj.Name = "lblCpfCnpj";
-            lblCpfCnpj.Size = new Size(60, 15);
+            lblCpfCnpj.Size = new Size(28, 15);
             lblCpfCnpj.TabIndex = 13;
-            lblCpfCnpj.Text = "CPF/CNPJ";
+            lblCpfCnpj.Text = "CPF";
             // 
             // pnlTipoPessoa
             // 
             pnlTipoPessoa.Controls.Add(rdbJuridica);
             pnlTipoPessoa.Controls.Add(rdbFisica);
+            pnlTipoPessoa.Enabled = false;
             pnlTipoPessoa.Location = new Point(384, 96);
             pnlTipoPessoa.Name = "pnlTipoPessoa";
             pnlTipoPessoa.Size = new Size(152, 32);
@@ -326,6 +337,7 @@
             rdbJuridica.TabIndex = 1;
             rdbJuridica.Text = "Jurídica";
             rdbJuridica.UseVisualStyleBackColor = true;
+            rdbJuridica.CheckedChanged += rdbJuridica_CheckedChanged;
             // 
             // rdbFisica
             // 
@@ -338,6 +350,7 @@
             rdbFisica.TabStop = true;
             rdbFisica.Text = "Física";
             rdbFisica.UseVisualStyleBackColor = true;
+            rdbFisica.CheckedChanged += rdbFisica_CheckedChanged;
             // 
             // lblTipoPessoa
             // 
@@ -352,6 +365,7 @@
             // 
             txtCelular.Location = new Point(200, 96);
             txtCelular.Name = "txtCelular";
+            txtCelular.ReadOnly = true;
             txtCelular.Size = new Size(168, 23);
             txtCelular.TabIndex = 4;
             // 
@@ -368,6 +382,7 @@
             // 
             txtTelefone.Location = new Point(16, 96);
             txtTelefone.Name = "txtTelefone";
+            txtTelefone.ReadOnly = true;
             txtTelefone.Size = new Size(168, 23);
             txtTelefone.TabIndex = 3;
             // 
@@ -384,6 +399,7 @@
             // 
             txtNome.Location = new Point(136, 40);
             txtNome.Name = "txtNome";
+            txtNome.ReadOnly = true;
             txtNome.Size = new Size(280, 23);
             txtNome.TabIndex = 1;
             // 
@@ -424,6 +440,7 @@
             btnNovo.TabIndex = 13;
             btnNovo.Text = "Novo";
             btnNovo.UseVisualStyleBackColor = true;
+            btnNovo.Click += btnNovo_Click;
             // 
             // imlIcones
             // 
@@ -439,6 +456,7 @@
             // 
             // btnEditar
             // 
+            btnEditar.Enabled = false;
             btnEditar.ImageAlign = ContentAlignment.MiddleLeft;
             btnEditar.ImageIndex = 2;
             btnEditar.ImageList = imlIcones;
@@ -451,6 +469,7 @@
             // 
             // btnSalvar
             // 
+            btnSalvar.Enabled = false;
             btnSalvar.ImageAlign = ContentAlignment.MiddleLeft;
             btnSalvar.ImageIndex = 5;
             btnSalvar.ImageList = imlIcones;
@@ -464,6 +483,7 @@
             // 
             // btnExcluir
             // 
+            btnExcluir.Enabled = false;
             btnExcluir.ImageAlign = ContentAlignment.MiddleLeft;
             btnExcluir.ImageIndex = 1;
             btnExcluir.ImageList = imlIcones;
@@ -476,6 +496,7 @@
             // 
             // btnCancelar
             // 
+            btnCancelar.Enabled = false;
             btnCancelar.ImageAlign = ContentAlignment.MiddleLeft;
             btnCancelar.ImageIndex = 0;
             btnCancelar.ImageList = imlIcones;
@@ -485,6 +506,7 @@
             btnCancelar.TabIndex = 17;
             btnCancelar.Text = "Cancelar";
             btnCancelar.UseVisualStyleBackColor = true;
+            btnCancelar.Click += btnCancelar_Click;
             // 
             // lblPesquisar
             // 

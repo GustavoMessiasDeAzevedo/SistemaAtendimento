@@ -43,6 +43,8 @@ namespace SistemaAtendimento.Controller
                 _clienteRepository.Inserir(cliente);
                 _frmCadastroCliente.ExibirMensagem("Cliente cadastrado com sucesso!");
                 ListarClientes();
+
+                _frmCadastroCliente.DesabilitarCampos();
             }
             catch (Exception ex)
             {

@@ -33,6 +33,7 @@ namespace SistemaAtendimento.Controller
                 _etapaRepository.Inserir(etapa);
                 _frmCadastroEtapa.ExibirMensagem("Etapa cadastrada com sucesso!");
                 ListarEtapas();
+                _frmCadastroEtapa.DesabilitarCampos();
             }
             catch (Exception ex)
             { 

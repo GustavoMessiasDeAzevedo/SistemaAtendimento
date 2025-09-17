@@ -88,6 +88,7 @@
             // 
             pnlSituacao.Controls.Add(rdbInativo);
             pnlSituacao.Controls.Add(rdbAtivo);
+            pnlSituacao.Enabled = false;
             pnlSituacao.Location = new Point(280, 96);
             pnlSituacao.Name = "pnlSituacao";
             pnlSituacao.Size = new Size(144, 40);
@@ -119,6 +120,7 @@
             // 
             txtCor.Location = new Point(8, 96);
             txtCor.Name = "txtCor";
+            txtCor.ReadOnly = true;
             txtCor.Size = new Size(264, 23);
             txtCor.TabIndex = 5;
             // 
@@ -135,6 +137,7 @@
             // 
             txtNome.Location = new Point(136, 40);
             txtNome.Name = "txtNome";
+            txtNome.ReadOnly = true;
             txtNome.Size = new Size(472, 23);
             txtNome.TabIndex = 3;
             // 
@@ -151,6 +154,7 @@
             // 
             txtCodigo.Location = new Point(8, 40);
             txtCodigo.Name = "txtCodigo";
+            txtCodigo.ReadOnly = true;
             txtCodigo.Size = new Size(100, 23);
             txtCodigo.TabIndex = 1;
             // 
@@ -177,6 +181,7 @@
             // 
             // btnEditar
             // 
+            btnEditar.Enabled = false;
             btnEditar.ImageAlign = ContentAlignment.MiddleLeft;
             btnEditar.ImageIndex = 2;
             btnEditar.ImageList = imlIcones;
@@ -215,6 +220,7 @@
             // 
             // btnCancelar
             // 
+            btnCancelar.Enabled = false;
             btnCancelar.ImageAlign = ContentAlignment.MiddleLeft;
             btnCancelar.ImageIndex = 0;
             btnCancelar.ImageList = imlIcones;
@@ -224,9 +230,11 @@
             btnCancelar.TabIndex = 41;
             btnCancelar.Text = "Cancelar";
             btnCancelar.UseVisualStyleBackColor = true;
+            btnCancelar.Click += btnCancelar_Click;
             // 
             // btnExcluir
             // 
+            btnExcluir.Enabled = false;
             btnExcluir.ImageAlign = ContentAlignment.MiddleLeft;
             btnExcluir.ImageIndex = 1;
             btnExcluir.ImageList = imlIcones;
@@ -239,6 +247,7 @@
             // 
             // btnSalvar
             // 
+            btnSalvar.Enabled = false;
             btnSalvar.ImageAlign = ContentAlignment.MiddleLeft;
             btnSalvar.ImageIndex = 5;
             btnSalvar.ImageList = imlIcones;
@@ -261,6 +270,7 @@
             btnNovo.TabIndex = 37;
             btnNovo.Text = "Novo";
             btnNovo.UseVisualStyleBackColor = true;
+            btnNovo.Click += btnNovo_Click;
             // 
             // groupBox2
             // 

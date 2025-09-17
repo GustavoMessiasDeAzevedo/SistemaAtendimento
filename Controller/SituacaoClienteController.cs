@@ -33,6 +33,7 @@ namespace SistemaAtendimento.Controller
                 _situacaoAtendimentoRepository.Inserir(situacaoAtendimento);
                 _frmCadastroSituacaoAtendimento.ExibirMensagem("Situação de atendimento cadastrada com sucesso!");
                 ListarSitucao();
+                _frmCadastroSituacaoAtendimento.DesabilitarCampos();
             }
             catch (Exception ex)
             {

@@ -33,6 +33,7 @@ namespace SistemaAtendimento.Controller
                 _usuarioRepository.Inserir(usuario);
                 _frmCadastroUsuario.ExibirMensagem("Usuário cadastrado com sucesso!");
                 ListarUsuarios();
+                _frmCadastroUsuario.DesabilitarCampos();
             }
             catch (Exception ex)
             {

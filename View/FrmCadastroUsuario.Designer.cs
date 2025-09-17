@@ -80,6 +80,7 @@
             // 
             txtCodigo.Location = new Point(16, 48);
             txtCodigo.Name = "txtCodigo";
+            txtCodigo.ReadOnly = true;
             txtCodigo.Size = new Size(100, 23);
             txtCodigo.TabIndex = 10;
             // 
@@ -94,6 +95,7 @@
             // 
             // cbxPerfil
             // 
+            cbxPerfil.Enabled = false;
             cbxPerfil.FormattingEnabled = true;
             cbxPerfil.Location = new Point(344, 104);
             cbxPerfil.Name = "cbxPerfil";
@@ -113,6 +115,7 @@
             // 
             txtSenha.Location = new Point(16, 104);
             txtSenha.Name = "txtSenha";
+            txtSenha.ReadOnly = true;
             txtSenha.Size = new Size(312, 23);
             txtSenha.TabIndex = 5;
             // 
@@ -129,6 +132,7 @@
             // 
             txtEmail.Location = new Point(392, 48);
             txtEmail.Name = "txtEmail";
+            txtEmail.ReadOnly = true;
             txtEmail.Size = new Size(264, 23);
             txtEmail.TabIndex = 3;
             // 
@@ -145,6 +149,7 @@
             // 
             txtNome.Location = new Point(128, 48);
             txtNome.Name = "txtNome";
+            txtNome.ReadOnly = true;
             txtNome.Size = new Size(248, 23);
             txtNome.TabIndex = 1;
             // 
@@ -177,6 +182,7 @@
             // 
             // btnEditar
             // 
+            btnEditar.Enabled = false;
             btnEditar.ImageAlign = ContentAlignment.MiddleLeft;
             btnEditar.ImageIndex = 2;
             btnEditar.ImageList = imlIcones;
@@ -227,6 +233,7 @@
             // 
             // btnCancelar
             // 
+            btnCancelar.Enabled = false;
             btnCancelar.ImageAlign = ContentAlignment.MiddleLeft;
             btnCancelar.ImageIndex = 0;
             btnCancelar.ImageList = imlIcones;
@@ -236,9 +243,11 @@
             btnCancelar.TabIndex = 25;
             btnCancelar.Text = "Cancelar";
             btnCancelar.UseVisualStyleBackColor = true;
+            btnCancelar.Click += btnCancelar_Click;
             // 
             // btnExcluir
             // 
+            btnExcluir.Enabled = false;
             btnExcluir.ImageAlign = ContentAlignment.MiddleLeft;
             btnExcluir.ImageIndex = 1;
             btnExcluir.ImageList = imlIcones;
@@ -251,6 +260,7 @@
             // 
             // btnSalvar
             // 
+            btnSalvar.Enabled = false;
             btnSalvar.ImageAlign = ContentAlignment.MiddleLeft;
             btnSalvar.ImageIndex = 5;
             btnSalvar.ImageList = imlIcones;
@@ -273,6 +283,7 @@
             btnNovo.TabIndex = 21;
             btnNovo.Text = "Novo";
             btnNovo.UseVisualStyleBackColor = true;
+            btnNovo.Click += btnNovo_Click;
             // 
             // FrmCadastroUsuario
             // 

@@ -40,5 +40,24 @@ namespace SistemaAtendimento.Controller
                 _frmCadastroSituacaoAtendimento.ExibirMensagem($"Erro ao salvar a situação de atendimento: {ex.Message}");
             }
         }
+
+        public void Atualizar(SituacaoAtendimento situacaoAtendimento)
+        {
+
+            try
+            {
+                _situacaoAtendimentoRepository.Atualizar(situacaoAtendimento);
+                _frmCadastroSituacaoAtendimento.ExibirMensagem("Situação de atendimento atualizada com sucesso!");
+                ListarSitucao();
+
+                _frmCadastroSituacaoAtendimento.DesabilitarCampos();
+            }
+            catch (Exception ex)
+            {
+                _frmCadastroSituacaoAtendimento.ExibirMensagem($"Erro ao atualizar a Situação de atendimento: {ex.Message}");
+            }
+
+            
+        }
     }
 }

@@ -191,6 +191,7 @@
             btnEditar.TabIndex = 38;
             btnEditar.Text = "Editar";
             btnEditar.UseVisualStyleBackColor = true;
+            btnEditar.Click += btnEditar_Click;
             // 
             // btnPesquisar
             // 
@@ -286,9 +287,13 @@
             // 
             dgvSituacaoAtendimento.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvSituacaoAtendimento.Location = new Point(8, 24);
+            dgvSituacaoAtendimento.MultiSelect = false;
             dgvSituacaoAtendimento.Name = "dgvSituacaoAtendimento";
+            dgvSituacaoAtendimento.ReadOnly = true;
+            dgvSituacaoAtendimento.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgvSituacaoAtendimento.Size = new Size(632, 150);
             dgvSituacaoAtendimento.TabIndex = 0;
+            dgvSituacaoAtendimento.CellDoubleClick += dgvSituacaoAtendimento_CellDoubleClick;
             // 
             // FrmCadastroSituacaoAtendimento
             // 

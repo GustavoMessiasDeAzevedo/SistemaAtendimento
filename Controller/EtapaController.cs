@@ -40,5 +40,23 @@ namespace SistemaAtendimento.Controller
                 _frmCadastroEtapa.ExibirMensagem($"Erro ao salvar a etapa: {ex.Message}");
             }
         }
+
+
+        public void Atualizar(Etapas etapa)
+        {
+
+            try
+            {
+                _etapaRepository.Atualizar(etapa);
+                _frmCadastroEtapa.ExibirMensagem("Etapa atualizada com sucesso!");
+                ListarEtapas();
+
+                _frmCadastroEtapa.DesabilitarCampos();
+            }
+            catch (Exception ex)
+            {
+                _frmCadastroEtapa.ExibirMensagem($"Erro ao atualizar a etapa: {ex.Message}");
+            }
+        }
     }
 }

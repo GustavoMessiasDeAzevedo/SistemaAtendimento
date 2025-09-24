@@ -60,5 +60,22 @@ namespace SistemaAtendimento.Repositories
                 }
             }
         }
+
+        public void Atualizar (SituacaoAtendimento situacaoAtendimento)
+        {
+            using (var conexao = ConexaoDB.GetConexao())
+            {
+                string sql = "UPDATE situacao_atendimentos SET nome = @nome, cor = @cor, ativo = @ativo WHERE id = @id";
+                using (var comando = new SqlCommand(sql, conexao))
+                {
+                    comando.Parameters.AddWithValue("@id", situacaoAtendimento.Id);
+                    comando.Parameters.AddWithValue("@nome", situacaoAtendimento.nome);
+                    comando.Parameters.AddWithValue("@cor", situacaoAtendimento.cor);
+                    comando.Parameters.AddWithValue("@ativo", situacaoAtendimento.Ativo);
+                    conexao.Open();
+                    comando.ExecuteNonQuery();
+                }
+            }
+        }
     }
 }

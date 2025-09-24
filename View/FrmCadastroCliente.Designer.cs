@@ -466,6 +466,7 @@
             btnEditar.TabIndex = 14;
             btnEditar.Text = "Editar";
             btnEditar.UseVisualStyleBackColor = true;
+            btnEditar.Click += btnEditar_Click;
             // 
             // btnSalvar
             // 
@@ -548,9 +549,13 @@
             // 
             dgvCliente.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvCliente.Location = new Point(8, 24);
+            dgvCliente.MultiSelect = false;
             dgvCliente.Name = "dgvCliente";
+            dgvCliente.ReadOnly = true;
+            dgvCliente.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgvCliente.Size = new Size(744, 184);
             dgvCliente.TabIndex = 0;
+            dgvCliente.CellDoubleClick += dgvCliente_CellDoubleClick;
             // 
             // FrmCadastroCliente
             // 

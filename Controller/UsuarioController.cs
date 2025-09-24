@@ -40,5 +40,20 @@ namespace SistemaAtendimento.Controller
                 _frmCadastroUsuario.ExibirMensagem($"Erro ao salvar o usuário: {ex.Message}");
             }
         }
+
+        public void Atualizar(Usuarios usuario)
+        {
+            try
+            {
+                _usuarioRepository.Atualizar(usuario);
+                _frmCadastroUsuario.ExibirMensagem("Usuário Atualizado com sucesso!");
+                ListarUsuarios();
+                _frmCadastroUsuario.DesabilitarCampos();
+            }
+            catch (Exception ex)
+            {
+                _frmCadastroUsuario.ExibirMensagem($"Erro ao Atualizar o usuário: {ex.Message}");
+            }
+        }
     }
 }

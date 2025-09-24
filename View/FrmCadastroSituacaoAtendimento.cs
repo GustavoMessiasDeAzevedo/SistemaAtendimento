@@ -45,7 +45,15 @@ namespace SistemaAtendimento.View
                 Ativo = rdbAtivo.Checked
             };
 
-            _situacaoClienteController.Salvar(situacaoAtendimento);
+            if (string.IsNullOrEmpty(txtCodigo.Text))
+            {
+                _situacaoClienteController.Salvar(situacaoAtendimento);
+            }
+            else
+            {
+                situacaoAtendimento.Id = Convert.ToInt32(txtCodigo.Text);
+                _situacaoClienteController.Atualizar(situacaoAtendimento);
+            }
             DesabilitarCampos();
         }
 
@@ -66,6 +74,7 @@ namespace SistemaAtendimento.View
 
         private void LimparCampos()
         {
+            txtCodigo.Clear();
             txtNome.Clear();
             txtCor.Clear();
             rdbAtivo.Checked = true;
@@ -74,6 +83,7 @@ namespace SistemaAtendimento.View
         public void DesabilitarCampos()
         {
             LimparCampos();
+
             txtNome.ReadOnly = true;
             txtCor.ReadOnly = true;
             pnlSituacao.Enabled = false;
@@ -88,6 +98,37 @@ namespace SistemaAtendimento.View
         private void btnCancelar_Click(object sender, EventArgs e)
         {
             DesabilitarCampos();
+        }
+
+        private void dgvSituacaoAtendimento_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0)
+            {
+                DataGridViewRow linhaSelecionada = dgvSituacaoAtendimento.Rows[e.RowIndex];
+                txtCodigo.Text = linhaSelecionada.Cells["Id"].Value.ToString();
+                txtNome.Text = linhaSelecionada.Cells["nome"].Value.ToString();
+                txtCor.Text = linhaSelecionada.Cells["cor"].Value.ToString();
+                bool ativo = Convert.ToBoolean(linhaSelecionada.Cells["Ativo"].Value);
+                if (ativo)
+                {
+                    rdbAtivo.Checked = true;
+                }
+                else
+                {
+                    rdbInativo.Checked = true;
+                }
+
+                btnEditar.Enabled = true;
+                btnNovo.Enabled = false;
+                btnCancelar.Enabled = true;
+
+            }
+        }
+
+        private void btnEditar_Click(object sender, EventArgs e)
+        {
+            HabilitarCampos();
+            btnEditar.Enabled = false;
         }
     }
 }

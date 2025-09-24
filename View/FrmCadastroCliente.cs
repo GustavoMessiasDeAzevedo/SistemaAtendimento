@@ -59,8 +59,16 @@ namespace SistemaAtendimento
             if (!ValidarDados(cliente))
                 return;
 
-            _clienteController.Salvar(cliente);
-            DesabilitarCampos();
+            if (string.IsNullOrEmpty(txtCodigo.Text))
+            {
+                _clienteController.Salvar(cliente);
+            }
+            else
+            {
+                cliente.Id = Convert.ToInt32(txtCodigo.Text);
+                _clienteController.Atualizar(cliente);
+            }
+                DesabilitarCampos();
         }
 
         public bool ValidarDados(Clientes cliente)
@@ -237,6 +245,7 @@ namespace SistemaAtendimento
 
         private void LimparCampos()
         {
+            txtCodigo.Clear();
             txtNome.Clear();
             txtEmail.Clear();
             txtCpfCnpj.Clear();
@@ -275,14 +284,55 @@ namespace SistemaAtendimento
             btnSalvar.Enabled = false;
             btnCancelar.Enabled = false;
             btnExcluir.Enabled = false;
-            btnExcluir.Enabled = false; 
+            btnEditar.Enabled = false;
             btnNovo.Enabled = true;
         }
 
         private void btnCancelar_Click(object sender, EventArgs e)
         {
-            
+
             DesabilitarCampos();
+        }
+
+        private void dgvCliente_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0)
+            {
+                DataGridViewRow linhaSelecionada = dgvCliente.Rows[e.RowIndex];
+
+                txtCodigo.Text = linhaSelecionada.Cells["Id"].Value.ToString();
+                txtNome.Text = linhaSelecionada.Cells["nome"].Value.ToString();
+                txtEmail.Text = linhaSelecionada.Cells["email"].Value.ToString();
+                txtTelefone.Text = linhaSelecionada.Cells["telefone"].Value.ToString();
+                txtCelular.Text = linhaSelecionada.Cells["celular"].Value.ToString();
+                txtCpfCnpj.Text = linhaSelecionada.Cells["cpf_cnpj"].Value.ToString();
+                if (linhaSelecionada.Cells["tipo_pessoa"].Value.ToString() == "F")
+                    rdbFisica.Checked = true;
+                else
+                    rdbJuridica.Checked = true;
+                txtCep.Text = linhaSelecionada.Cells["cep"].Value.ToString();
+                txtEndereco.Text = linhaSelecionada.Cells["endereco"].Value.ToString();
+                txtNumero.Text = linhaSelecionada.Cells["numero"].Value.ToString();
+                txtComplemento.Text = linhaSelecionada.Cells["complemento"].Value.ToString();
+                txtBairro.Text = linhaSelecionada.Cells["bairro"].Value.ToString();
+                txtCidade.Text = linhaSelecionada.Cells["cidade"].Value.ToString();
+                cbxEstado.Text = linhaSelecionada.Cells["estado"].Value.ToString();
+                if (Convert.ToBoolean(linhaSelecionada.Cells["ativo"].Value) == true)
+                    rdbAtivo.Checked = true;
+                else
+                    rdbInativo.Checked = true;
+
+                btnEditar.Enabled = true;
+                btnNovo.Enabled = false;
+                btnCancelar.Enabled = true;
+
+            }
+        }
+
+        private void btnEditar_Click(object sender, EventArgs e)
+        {
+            HabilitarCampos();
+            btnEditar.Enabled = false;
         }
     }
 

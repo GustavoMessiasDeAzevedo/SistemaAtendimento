@@ -45,7 +45,16 @@ namespace SistemaAtendimento.View
                 Ativo = rdbAtivo.Checked
             };
 
-            _etapaController.Salvar(etapa);
+            if (string.IsNullOrEmpty(txtCodigo.Text))
+            {
+                _etapaController.Salvar(etapa);
+            }
+            else
+            {
+                etapa.Id = Convert.ToInt32(txtCodigo.Text);
+                _etapaController.Atualizar(etapa);
+            }
+
             DesabilitarCampos();
         }
 
@@ -66,6 +75,7 @@ namespace SistemaAtendimento.View
 
         private void LimparCampos()
         {
+            txtCodigo.Clear();
             txtNome.Clear();
             txtOrdem.Clear();
             rdbAtivo.Checked = true;
@@ -88,6 +98,33 @@ namespace SistemaAtendimento.View
         private void btnCancelar_Click(object sender, EventArgs e)
         {
             DesabilitarCampos();
+        }
+
+        private void dgvEtapa_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            if (e.RowIndex >= 0)
+            {
+                DataGridViewRow linhaSelecionada = dgvEtapa.Rows[e.RowIndex];
+
+                txtCodigo.Text = linhaSelecionada.Cells["id"].Value.ToString();
+                txtNome.Text = linhaSelecionada.Cells["nome"].Value.ToString();
+                txtOrdem.Text = linhaSelecionada.Cells["ordem"].Value.ToString();
+                bool ativo = Convert.ToBoolean(linhaSelecionada.Cells["Ativo"].Value);
+                if (ativo)
+                    rdbAtivo.Checked = true;
+                else
+                    rdbInativo.Checked = true;
+
+                btnEditar.Enabled = true;
+                btnNovo.Enabled = false;
+                btnCancelar.Enabled = true;
+            }
+        }
+
+        private void btnEditar_Click(object sender, EventArgs e)
+        {
+            HabilitarCampos();
+            btnEditar.Enabled = false;
         }
     }
 }

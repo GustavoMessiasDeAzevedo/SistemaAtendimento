@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Newtonsoft.Json;
 using SistemaAtendimento.Controller;
 using SistemaAtendimento.Model;
 
@@ -68,7 +69,7 @@ namespace SistemaAtendimento
                 cliente.Id = Convert.ToInt32(txtCodigo.Text);
                 _clienteController.Atualizar(cliente);
             }
-                DesabilitarCampos();
+            DesabilitarCampos();
         }
 
         public bool ValidarDados(Clientes cliente)
@@ -290,7 +291,6 @@ namespace SistemaAtendimento
 
         private void btnCancelar_Click(object sender, EventArgs e)
         {
-
             DesabilitarCampos();
         }
 
@@ -333,6 +333,50 @@ namespace SistemaAtendimento
         {
             HabilitarCampos();
             btnEditar.Enabled = false;
+        }
+
+
+
+        private async Task BuscarEnderecoPorCep(string cep)
+        {
+            try
+            {
+                cep = cep.Replace("-", "").Trim();
+
+                using (HttpClient client = new HttpClient())
+                {
+                    string url = $"https://viacep.com.br/ws/{cep}/json/";
+
+                    var response = await client.GetAsync(url);
+
+                    if (response.IsSuccessStatusCode)
+                    {
+                        string json = await response.Content.ReadAsStringAsync();
+
+                        dynamic? dadosEndereco = JsonConvert.DeserializeObject(json);
+
+                        txtEndereco.Text = dadosEndereco?.logradouro;
+                        txtBairro.Text = dadosEndereco?.bairro;
+                        txtCidade.Text = dadosEndereco?.localidade;
+                        cbxEstado.Text = dadosEndereco?.uf;
+                        txtNumero.Focus();
+                    }
+
+                    
+                }
+            }
+            catch (Exception ex)
+            {
+                ExibirMensagem($"Erro ao buscar o endereço: {ex.Message}");
+            }
+        }
+
+        private async void txtCep_Leave(object sender, EventArgs e)
+        {
+            if(!string.IsNullOrEmpty(txtCep.Text))
+            {
+                await BuscarEnderecoPorCep(txtCep.Text);
+            }
         }
     }
 

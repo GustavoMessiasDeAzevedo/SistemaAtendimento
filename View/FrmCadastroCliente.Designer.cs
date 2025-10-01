@@ -291,6 +291,7 @@
             txtCep.ReadOnly = true;
             txtCep.Size = new Size(168, 23);
             txtCep.TabIndex = 6;
+            txtCep.Leave += txtCep_Leave;
             // 
             // lblCEP
             // 

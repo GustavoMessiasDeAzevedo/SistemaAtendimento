@@ -19,20 +19,22 @@ namespace SistemaAtendimento.Controller
             _clienteRepository = new ClienteRepository();
         }
 
-        public void ListarClientes()
+        public void ListarClientes(string termo = "")
         {
             try 
             {
+                var listaClientes = _clienteRepository.Listar(termo);
                 _frmCadastroCliente.ExibirClientes(_clienteRepository.Listar());
+                _frmCadastroCliente.ExibirClientes(listaClientes);
             }
             catch(Exception ex)
             {
                 _frmCadastroCliente.ExibirMensagem($"Erro ao carregar os clientes: {ex.Message}");
             }
 
-            var listaClientes = _clienteRepository.Listar();
+            
 
-            _frmCadastroCliente.ExibirClientes(listaClientes);
+            
         }
 
         public void Salvar(Clientes cliente)

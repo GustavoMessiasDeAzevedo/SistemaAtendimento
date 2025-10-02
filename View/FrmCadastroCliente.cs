@@ -353,6 +353,14 @@ namespace SistemaAtendimento
                     {
                         string json = await response.Content.ReadAsStringAsync();
 
+                        if (json.Contains("erro"))
+                        {
+                            ExibirMensagem("CEP não encontrado.");
+                            DesabilitarCampos();
+                            LimparCampos();
+                            return;
+                        }
+
                         dynamic? dadosEndereco = JsonConvert.DeserializeObject(json);
 
                         txtEndereco.Text = dadosEndereco?.logradouro;
@@ -361,8 +369,6 @@ namespace SistemaAtendimento
                         cbxEstado.Text = dadosEndereco?.uf;
                         txtNumero.Focus();
                     }
-
-                    
                 }
             }
             catch (Exception ex)
@@ -373,10 +379,16 @@ namespace SistemaAtendimento
 
         private async void txtCep_Leave(object sender, EventArgs e)
         {
-            if(!string.IsNullOrEmpty(txtCep.Text))
+            if (!string.IsNullOrEmpty(txtCep.Text))
             {
                 await BuscarEnderecoPorCep(txtCep.Text);
             }
+        }
+
+        private void btnPesquisar_Click(object sender, EventArgs e)
+        {
+            string termo = txtPesquisar.Text.Trim();
+            _clienteController.ListarClientes(termo);
         }
     }
 

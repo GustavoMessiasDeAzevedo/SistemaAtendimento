@@ -20,9 +20,10 @@ namespace SistemaAtendimento.Controller
             _usuarioRepository = new UsuarioRepository();
         }
 
-        public void ListarUsuarios()
+        public void ListarUsuarios(string termo = "")
         {
-            var listaUsuarios = _usuarioRepository.Listar();
+            var listaUsuarios = _usuarioRepository.Listar(termo);
+            _frmCadastroUsuario.ExibirUsuarios(_usuarioRepository.Listar(termo));
             _frmCadastroUsuario.ExibirUsuarios(listaUsuarios);
         }
 
@@ -55,5 +56,22 @@ namespace SistemaAtendimento.Controller
                 _frmCadastroUsuario.ExibirMensagem($"Erro ao Atualizar o usuário: {ex.Message}");
             }
         }
+
+        public void Deletar(Usuarios usuario)
+        {
+            try
+            {
+                var confirmacao = MessageBox.Show("Tem certeza que deseja deletar este usuário?", "Confirmação", MessageBoxButtons.YesNo);
+                if (confirmacao == DialogResult.Yes)
+                {
+                    _usuarioRepository.Deletar(usuario);
+                    _frmCadastroUsuario.ExibirMensagem("Usuário deletado com sucesso!");
+                    ListarUsuarios();
+                    _frmCadastroUsuario.DesabilitarCampos();
+                }
+            }catch(Exception ex)
+            {
+                _frmCadastroUsuario.ExibirMensagem($"Erro ao deletar o usuário: {ex.Message}");
+            }
     }
 }

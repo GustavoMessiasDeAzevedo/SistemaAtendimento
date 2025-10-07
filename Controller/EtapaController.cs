@@ -20,9 +20,10 @@ namespace SistemaAtendimento.Controller
             _etapaRepository = new EtapaRepository();
         }
 
-        public void ListarEtapas() 
+        public void ListarEtapas(string termo = "") 
         { 
-            var listarEtapas = _etapaRepository.Listar();
+            var listarEtapas = _etapaRepository.Listar(termo);
+            _frmCadastroEtapa.ExibirEtapas(_etapaRepository.Listar(termo));
             _frmCadastroEtapa.ExibirEtapas(listarEtapas);
         }
 
@@ -56,6 +57,25 @@ namespace SistemaAtendimento.Controller
             catch (Exception ex)
             {
                 _frmCadastroEtapa.ExibirMensagem($"Erro ao atualizar a etapa: {ex.Message}");
+            }
+        }
+
+        public void Deletar(Etapas etapa)
+        {
+            try
+            {
+                var confirmacao = MessageBox.Show("Tem certeza que deseja deletar esta etapa?", "Confirmação", MessageBoxButtons.YesNo);
+                if (confirmacao == DialogResult.Yes)
+                {
+                    _etapaRepository.Deletar(etapa);
+                    _frmCadastroEtapa.ExibirMensagem("Etapa deletada com sucesso!");
+                    ListarEtapas();
+                    _frmCadastroEtapa.DesabilitarCampos();
+                }
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine($"Não foi possível deletar a etapa: {ex.Message}");
             }
         }
     }

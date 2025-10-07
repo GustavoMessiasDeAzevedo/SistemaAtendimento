@@ -11,16 +11,26 @@ namespace SistemaAtendimento.Repositories
 {
     internal class UsuarioRepository
     {
-        public List<Usuarios> Listar() 
+        public List<Usuarios> Listar(string termo = "") 
         {
             var usuarios = new List<Usuarios>();
 
             using (var conexao = ConexaoDB.GetConexao()) 
             { 
                 string sql = "SELECT * FROM Usuarios";
+                if (!string.IsNullOrEmpty(termo))
+                {
+                    sql = $"SELECT * FROM Usuarios WHERE nome LIKE @termo OR email LIKE @termo";
+                }
+           
 
                 using (var comando = new SqlCommand(sql, conexao)) 
                 { 
+                   
+                    if(!string.IsNullOrEmpty(termo))
+                    {
+                        comando.Parameters.AddWithValue("@termo", "%" + termo + "%");
+                    }
                     conexao.Open();
 
                     using(var linhas = comando.ExecuteReader())
@@ -72,6 +82,20 @@ namespace SistemaAtendimento.Repositories
                     comando.Parameters.AddWithValue("@email", usuario.Email);
                     comando.Parameters.AddWithValue("@senha", usuario.Senha);
                     comando.Parameters.AddWithValue("@perfil", usuario.Perfil);
+                    conexao.Open();
+                    comando.ExecuteNonQuery();
+                }
+            }
+        }
+        
+        public void Deletar(Usuarios usuario)
+        {
+            using (var conexao = ConexaoDB.GetConexao())
+            {
+                string sql = "DELETE FROM usuarios WHERE id=@id";
+                using (var comando = new SqlCommand(sql, conexao))
+                {
+                    comando.Parameters.AddWithValue("@id", usuario.Id);
                     conexao.Open();
                     comando.ExecuteNonQuery();
                 }

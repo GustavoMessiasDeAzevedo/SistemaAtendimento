@@ -9,8 +9,8 @@ namespace SistemaAtendimento.Model
     public class Etapas
     {
         public int Id { get; set; }
-        public string nome { get; set; }
-        public int ordem { get; set; }
+        public string? nome { get; set; }
+        public int? ordem { get; set; }
         public bool Ativo { get; set; }
     }
 }

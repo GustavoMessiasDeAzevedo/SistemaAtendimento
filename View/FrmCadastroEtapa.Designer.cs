@@ -203,6 +203,7 @@
             btnPesquisar.Size = new Size(32, 31);
             btnPesquisar.TabIndex = 35;
             btnPesquisar.UseVisualStyleBackColor = true;
+            btnPesquisar.Click += btnPesquisar_Click;
             // 
             // txtPesquisar
             // 
@@ -246,6 +247,7 @@
             btnExcluir.TabIndex = 32;
             btnExcluir.Text = "Excluir";
             btnExcluir.UseVisualStyleBackColor = true;
+            btnExcluir.Click += btnExcluir_Click;
             // 
             // btnSalvar
             // 
@@ -294,7 +296,7 @@
             dgvEtapa.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgvEtapa.Size = new Size(664, 144);
             dgvEtapa.TabIndex = 0;
-            dgvEtapa.CellMouseDoubleClick += dgvEtapa_CellMouseDoubleClick;
+            dgvEtapa.CellDoubleClick += dgvEtapa_CellDoubleClick;
             // 
             // FrmCadastroEtapa
             // 

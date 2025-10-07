@@ -121,6 +121,7 @@ namespace SistemaAtendimento.View
                 btnEditar.Enabled = true;
                 btnNovo.Enabled = false;
                 btnCancelar.Enabled = true;
+                btnExcluir.Enabled = true;
 
             }
         }
@@ -129,6 +130,34 @@ namespace SistemaAtendimento.View
         {
             HabilitarCampos();
             btnEditar.Enabled = false;
+        }
+
+        private void btnPesquisar_Click(object sender, EventArgs e)
+        {
+            string termo = txtPesquisar.Text;
+            _situacaoClienteController.ListarSitucao(termo);
+        }
+
+        private void btnExcluir_Click(object sender, EventArgs e)
+        {
+            if(string.IsNullOrEmpty(txtCodigo.Text))
+            {
+                ExibirMensagem("Selecione uma situação de atendimento para excluir.");
+                return;
+            }
+
+            SituacaoAtendimento situacaoAtendimento = new SituacaoAtendimento
+            {
+                Id = Convert.ToInt32(txtCodigo.Text)
+            };
+
+            if (!string.IsNullOrEmpty(txtCodigo.Text))
+            {
+                _situacaoClienteController.Deletar(situacaoAtendimento);
+                _situacaoClienteController.ListarSitucao();
+                DesabilitarCampos();
+
+            }
         }
     }
 }

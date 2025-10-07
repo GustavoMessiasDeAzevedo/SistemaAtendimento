@@ -124,5 +124,20 @@ namespace SistemaAtendimento.Repositories
                 }
             }
         }
+
+        public void Deletar(Clientes cliente)
+        {
+            using (var conexao = ConexaoDB.GetConexao())
+            {
+                string sql = "DELETE FROM clientes WHERE id=@Id";
+
+                using (var comando = new SqlCommand(sql, conexao))
+                {
+                    comando.Parameters.AddWithValue("@Id", cliente.Id);
+                    conexao.Open();
+                    comando.ExecuteNonQuery();
+                }
+            }
+        }
     }
 }

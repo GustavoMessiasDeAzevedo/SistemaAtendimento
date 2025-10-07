@@ -162,8 +162,6 @@ namespace SistemaAtendimento
             lblCpfCnpj.Text = "CPF";
         }
 
-
-
         public bool ValidarCPF()
         {
             int[] numeroCPF = new int[11];
@@ -219,7 +217,6 @@ namespace SistemaAtendimento
         {
             HabilitarCampos();
         }
-
 
         private void HabilitarCampos()
         {
@@ -325,6 +322,7 @@ namespace SistemaAtendimento
                 btnEditar.Enabled = true;
                 btnNovo.Enabled = false;
                 btnCancelar.Enabled = true;
+                btnExcluir.Enabled = true;
 
             }
         }
@@ -334,8 +332,6 @@ namespace SistemaAtendimento
             HabilitarCampos();
             btnEditar.Enabled = false;
         }
-
-
 
         private async Task BuscarEnderecoPorCep(string cep)
         {
@@ -390,6 +386,26 @@ namespace SistemaAtendimento
             string termo = txtPesquisar.Text.Trim();
             _clienteController.ListarClientes(termo);
         }
-    }
 
+        private void btnExcluir_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(txtCodigo.Text))
+            {
+                ExibirMensagem("Nenhum cliente selecionado para exclusão.");
+                return;
+            }
+
+            Clientes cliente = new Clientes
+            {
+                Id = Convert.ToInt32(txtCodigo.Text)
+            };
+            if (!string.IsNullOrEmpty(txtCodigo.Text))
+            {
+                _clienteController.Deletar(cliente);
+                _clienteController.ListarClientes();
+                DesabilitarCampos();
+            }
+        }
+
+    }
 }

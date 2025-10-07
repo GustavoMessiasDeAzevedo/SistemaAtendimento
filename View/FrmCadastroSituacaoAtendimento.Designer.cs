@@ -202,6 +202,7 @@
             btnPesquisar.Size = new Size(32, 31);
             btnPesquisar.TabIndex = 43;
             btnPesquisar.UseVisualStyleBackColor = true;
+            btnPesquisar.Click += btnPesquisar_Click;
             // 
             // txtPesquisar
             // 
@@ -245,6 +246,7 @@
             btnExcluir.TabIndex = 40;
             btnExcluir.Text = "Excluir";
             btnExcluir.UseVisualStyleBackColor = true;
+            btnExcluir.Click += btnExcluir_Click;
             // 
             // btnSalvar
             // 

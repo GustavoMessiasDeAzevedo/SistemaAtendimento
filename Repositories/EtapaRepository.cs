@@ -11,16 +11,25 @@ namespace SistemaAtendimento.Repositories
 {
     public class EtapaRepository
     {
-        public List<Etapas> Listar()
+        public List<Etapas> Listar(string termo = "")
         {
             var etapas = new List<Etapas>();
 
             using (var conexao = ConexaoDB.GetConexao()) 
             {
                 string sql = "SELECT * FROM Etapas";
+                if (!string.IsNullOrEmpty(termo))
+                {
+                    sql = $"SELECT * FROM Etapas WHERE nome LIKE @termo";
+                }
 
                 using (var comando = new SqlCommand(sql, conexao)) 
                 {
+                    
+                    if(!string.IsNullOrEmpty(termo))
+                    {
+                        comando.Parameters.AddWithValue("@termo", "%" + termo + "%");
+                    }
                     conexao.Open();
 
                     using (var Linhas = comando.ExecuteReader()) 
@@ -77,6 +86,19 @@ namespace SistemaAtendimento.Repositories
             }
         }
 
+        public void Deletar(Etapas etapa)
+        {
+            using (var conexao = ConexaoDB.GetConexao())
+            {
+                string sql = "DELETE FROM etapas WHERE id=@id";
+                using (var comando = new SqlCommand(sql, conexao))
+                {
+                    comando.Parameters.AddWithValue("@id", etapa.Id);
+                    conexao.Open();
+                    comando.ExecuteNonQuery();
+                }
+            }
+        }
 
 
 

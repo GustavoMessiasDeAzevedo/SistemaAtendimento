@@ -117,6 +117,7 @@ namespace SistemaAtendimento.View
                 btnEditar.Enabled = true;
                 btnCancelar.Enabled = true;
                 btnNovo.Enabled = false;
+                btnExcluir.Enabled = true;
 
             }
         }
@@ -125,6 +126,31 @@ namespace SistemaAtendimento.View
         {
             HabilitarCampos();
             btnEditar.Enabled = false;
+        }
+
+        private void btnPesquisar_Click(object sender, EventArgs e)
+        {
+            string termo = txtPesquisar.Text;
+            _usuarioController.ListarUsuarios(termo);
+        }
+
+        private void btnExcluir_Click(object sender, EventArgs e)
+        {
+            if(string.IsNullOrEmpty(txtCodigo.Text))
+            {
+                ExibirMensagem("Selecione um usuário para excluir.");
+                return;
+            }
+            Usuarios usuario = new Usuarios
+            {
+                Id = int.Parse(txtCodigo.Text)
+            };
+            if (!string.IsNullOrEmpty(txtCodigo.Text))
+            {
+                _usuarioController.Deletar(usuario);
+                _usuarioController.ListarUsuarios();
+                DesabilitarCampos();
+            }
         }
     }
 }

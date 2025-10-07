@@ -126,5 +126,53 @@ namespace SistemaAtendimento.View
             HabilitarCampos();
             btnEditar.Enabled = false;
         }
+
+        private void btnPesquisar_Click(object sender, EventArgs e)
+        {
+            string termo = txtPesquisar.Text.Trim();
+            _etapaController.ListarEtapas(termo);
+        }
+
+        private void dgvEtapa_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0)
+            {
+                DataGridViewRow linhaSelecionada = dgvEtapa.Rows[e.RowIndex];
+
+                txtCodigo.Text = linhaSelecionada.Cells["id"].Value.ToString();
+                txtNome.Text = linhaSelecionada.Cells["nome"].Value.ToString();
+                txtOrdem.Text = linhaSelecionada.Cells["ordem"].Value.ToString();
+                if (Convert.ToBoolean(linhaSelecionada.Cells["Ativo"].Value))
+                    rdbAtivo.Checked = true;
+                else
+                    rdbInativo.Checked = true;
+
+                btnEditar.Enabled = true;
+                btnNovo.Enabled = false;
+                btnCancelar.Enabled = true;
+                btnExcluir.Enabled = true;
+            }
+        }
+
+        private void btnExcluir_Click(object sender, EventArgs e)
+        {
+            if(string.IsNullOrEmpty(txtCodigo.Text))
+            {
+                ExibirMensagem("Selecione uma etapa para excluir.");
+                return;
+            }
+
+            Etapas etapa = new Etapas()
+            {
+                Id = Convert.ToInt32(txtCodigo.Text)
+            };
+
+            if (!string.IsNullOrEmpty(txtCodigo.Text))
+            {
+                _etapaController.Deletar(etapa);
+                _etapaController.ListarEtapas();
+                DesabilitarCampos();
+            }
+        }
     }
 }

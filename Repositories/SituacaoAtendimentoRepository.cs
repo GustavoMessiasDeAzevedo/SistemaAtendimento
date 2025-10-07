@@ -12,7 +12,7 @@ namespace SistemaAtendimento.Repositories
     public class SituacaoAtendimentoRepository
     {
 
-        public List<SituacaoAtendimento>Listar() 
+        public List<SituacaoAtendimento>Listar(string termo = "") 
         { 
         
             var SituacaoAtendimento = new List<SituacaoAtendimento>();
@@ -20,9 +20,18 @@ namespace SistemaAtendimento.Repositories
             using(var conexao = ConexaoDB.GetConexao()) 
             { 
                 string sql = "SELECT * FROM situacao_atendimentos";
+                if (!string.IsNullOrEmpty(termo))
+                {
+                    sql = $"SELECT * FROM situacao_atendimentos WHERE nome LIKE @termo";
+                }
 
                 using (var comando = new SqlCommand(sql, conexao)) 
                 { 
+                    if(!string.IsNullOrEmpty(termo))
+                    {
+                        comando.Parameters.AddWithValue("@termo", "%" + termo + "%");
+                    }
+
                     conexao.Open();
 
                     using (var linhas = comando.ExecuteReader()) 
@@ -72,6 +81,21 @@ namespace SistemaAtendimento.Repositories
                     comando.Parameters.AddWithValue("@nome", situacaoAtendimento.nome);
                     comando.Parameters.AddWithValue("@cor", situacaoAtendimento.cor);
                     comando.Parameters.AddWithValue("@ativo", situacaoAtendimento.Ativo);
+                    conexao.Open();
+                    comando.ExecuteNonQuery();
+                }
+            }
+        }
+
+
+        public void Deletar(SituacaoAtendimento situacaoAtendimento)
+        {
+            using (var conexao = ConexaoDB.GetConexao())
+            {
+                string sql = "DELETE FROM situacao_atendimentos WHERE id = @id";
+                using (var comando = new SqlCommand(sql, conexao))
+                {
+                    comando.Parameters.AddWithValue("@id", situacaoAtendimento.Id);
                     conexao.Open();
                     comando.ExecuteNonQuery();
                 }

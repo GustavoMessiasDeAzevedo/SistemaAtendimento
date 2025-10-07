@@ -71,5 +71,24 @@ namespace SistemaAtendimento.Controller
             }
         }
 
+        public void Deletar(Clientes cliente)
+        {
+            try
+            {
+                var confirmacao = MessageBox.Show("Tem certeza que deseja deletar este cliente?", "Confirmação", MessageBoxButtons.YesNo);
+                if (confirmacao == DialogResult.Yes)
+                {
+                    _clienteRepository.Deletar(cliente));
+                    _frmCadastroCliente.ExibirMensagem("Cliente deletado com sucesso!");
+                    ListarClientes();
+                    _frmCadastroCliente.DesabilitarCampos();
+                }
+            }
+            catch (Exception ex) 
+            {
+                Console.WriteLine($"Não foi possivel deletar o cliente: {ex.Message}");
+            }
+        }
+
     }
 }

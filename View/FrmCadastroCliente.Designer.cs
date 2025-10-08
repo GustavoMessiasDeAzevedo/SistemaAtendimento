@@ -433,7 +433,7 @@
             // btnNovo
             // 
             btnNovo.ImageAlign = ContentAlignment.MiddleLeft;
-            btnNovo.ImageIndex = 3;
+            btnNovo.ImageKey = "icone-novo.png";
             btnNovo.ImageList = imlIcones;
             btnNovo.Location = new Point(32, 320);
             btnNovo.Name = "btnNovo";

@@ -11,29 +11,27 @@ namespace SistemaAtendimento.Repositories
 {
     internal class UsuarioRepository
     {
-        public List<Usuarios> Listar(string termo = "") 
+        public List<Usuarios> Listar(string termo = "")
         {
             var usuarios = new List<Usuarios>();
 
-            using (var conexao = ConexaoDB.GetConexao()) 
-            { 
-                string sql = "SELECT * FROM Usuarios";
+            using (var conexao = ConexaoDB.GetConexao())
+            {
+                string sql = "SELECT * FROM usuarios";
                 if (!string.IsNullOrEmpty(termo))
                 {
-                    sql = $"SELECT * FROM Usuarios WHERE nome LIKE @termo OR email LIKE @termo";
+                    sql = "SELECT * FROM usuarios WHERE nome LIKE @termo OR email LIKE @termo";
                 }
-           
 
-                using (var comando = new SqlCommand(sql, conexao)) 
-                { 
-                   
-                    if(!string.IsNullOrEmpty(termo))
+                using (var comando = new SqlCommand(sql, conexao))
+                {
+                    if (!string.IsNullOrEmpty(termo))
                     {
-                        comando.Parameters.AddWithValue("@termo", "%" + termo + "%");
+                        comando.Parameters.AddWithValue("@termo", $"%{termo}%");
                     }
-                    conexao.Open();
 
-                    using(var linhas = comando.ExecuteReader())
+                    conexao.Open();
+                    using (var linhas = comando.ExecuteReader())
                     {
                         while (linhas.Read())
                         {
@@ -49,21 +47,21 @@ namespace SistemaAtendimento.Repositories
                     }
                 }
             }
-                return usuarios;
+
+            return usuarios;
         }
 
-        public void Inserir(Usuarios usuario)
+        public void Inserir(Usuarios usuarios)
         {
             using (var conexao = ConexaoDB.GetConexao())
             {
-                string sql = @"INSERT INTO usuarios (nome, email, senha, perfil) 
-                               VALUES (@nome, @email, @senha, @perfil)";
+                string sql = "INSERT INTO usuarios (nome, email, senha, perfil) VALUES (@nome, @email, @senha, @perfil)";
                 using (var comando = new SqlCommand(sql, conexao))
                 {
-                    comando.Parameters.AddWithValue("@nome", usuario.Nome);
-                    comando.Parameters.AddWithValue("@email", usuario.Email);
-                    comando.Parameters.AddWithValue("@senha", usuario.Senha);
-                    comando.Parameters.AddWithValue("@perfil", usuario.Perfil);
+                    comando.Parameters.AddWithValue("@nome", usuarios.Nome);
+                    comando.Parameters.AddWithValue("@email", usuarios.Email);
+                    comando.Parameters.AddWithValue("@senha", usuarios.Senha);
+                    comando.Parameters.AddWithValue("@perfil", usuarios.Perfil);
                     conexao.Open();
                     comando.ExecuteNonQuery();
                 }
@@ -74,7 +72,7 @@ namespace SistemaAtendimento.Repositories
         {
             using (var conexao = ConexaoDB.GetConexao())
             {
-                string sql = "UPDATE usuarios SET nome=@nome, email=@email, senha=@senha, perfil=@perfil WHERE id=@id";
+                string sql = "UPDATE usuarios SET nome = @nome, email = @email, senha = @senha, perfil = @perfil WHERE id = @id";
                 using (var comando = new SqlCommand(sql, conexao))
                 {
                     comando.Parameters.AddWithValue("@id", usuario.Id);
@@ -87,15 +85,15 @@ namespace SistemaAtendimento.Repositories
                 }
             }
         }
-        
-        public void Deletar(Usuarios usuario)
+
+        public void Excluir(int id)
         {
             using (var conexao = ConexaoDB.GetConexao())
             {
-                string sql = "DELETE FROM usuarios WHERE id=@id";
+                string sql = "DELETE FROM usuarios WHERE id = @id";
                 using (var comando = new SqlCommand(sql, conexao))
                 {
-                    comando.Parameters.AddWithValue("@id", usuario.Id);
+                    comando.Parameters.AddWithValue("@id", id);
                     conexao.Open();
                     comando.ExecuteNonQuery();
                 }

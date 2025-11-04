@@ -15,35 +15,51 @@ namespace SistemaAtendimento.View
     public partial class FrmCadastroEtapa : Form
     {
         private EtapaController _etapaController;
-
         public FrmCadastroEtapa()
         {
-            InitializeComponent();
             _etapaController = new EtapaController(this);
-        }
-
-        private void FrmCadastroEtapa_Load(object sender, EventArgs e)
-        {
-            _etapaController.ListarEtapas();
+            InitializeComponent();
         }
         public void ExibirMensagem(string mensagem)
         {
             MessageBox.Show(mensagem);
         }
 
-        public void ExibirEtapas(List<Etapas> Etapas)
+        internal void ExibirEtapas(List<Etapas> etapas)
         {
-            dgvEtapa.DataSource = Etapas;
+            dgvEtapas.DataSource = etapas;
+        }
+
+        private void FrmCadastroEtapa_Load(object sender, EventArgs e)
+        {
+            _etapaController.ListarEtapas();
+
+            dgvEtapas.Columns["Id"].HeaderText = "Código";
+            dgvEtapas.Columns["Nome"].HeaderText = "Nome da Etapa";
+            dgvEtapas.Columns["Ordem"].HeaderText = "Ordem";
+            dgvEtapas.Columns["Ativo"].HeaderText = "Ativo";
+
+            // Preenche o grid com ajuste automático
+            dgvEtapas.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.None;
+
+            // Ajuste individual:
+            dgvEtapas.Columns["Id"].Width = 60;
+            dgvEtapas.Columns["Nome"].Width = 200;
+            dgvEtapas.Columns["Ordem"].Width = 100;
+            dgvEtapas.Columns["Ativo"].Width = 60;
         }
 
         private void btnSalvar_Click(object sender, EventArgs e)
         {
-            Etapas etapa = new Etapas
+            Etapas etapa = new Etapas()
             {
-                nome = txtNome.Text,
-                ordem = txtOrdem.Text != "" ? Convert.ToInt32(txtOrdem.Text) : 0,
-                Ativo = rdbAtivo.Checked
+                Nome = txtNome.Text,
+                Ordem = txtOrdem.Text,
+                Ativo = rdbAtivo.Checked,
             };
+
+            if (!ValidaDados(etapa))
+                return;
 
             if (string.IsNullOrEmpty(txtCodigo.Text))
             {
@@ -55,12 +71,30 @@ namespace SistemaAtendimento.View
                 _etapaController.Atualizar(etapa);
             }
 
-            DesabilitarCampos();
         }
 
-        private void btnNovo_Click(object sender, EventArgs e)
+        private bool ValidaDados(Etapas Etapa)
         {
-            HabilitarCampos();
+            if (string.IsNullOrWhiteSpace(txtNome.Text))
+            {
+                ExibirMensagem("O campo Nome é obrigatório.");
+                txtNome.Focus();
+                return false;
+            }
+            if (string.IsNullOrWhiteSpace(txtOrdem.Text))
+            {
+                ExibirMensagem("O campo Ordem é obrigatório.");
+                txtOrdem.Focus();
+                return false;
+            }
+            if (!int.TryParse(txtOrdem.Text, out _))
+            {
+                ExibirMensagem("O campo Ordem deve ser número inteiro.");
+                txtOrdem.Focus();
+                return false;
+            }
+
+            return true;
         }
 
         private void HabilitarCampos()
@@ -68,9 +102,10 @@ namespace SistemaAtendimento.View
             txtNome.ReadOnly = false;
             txtOrdem.ReadOnly = false;
             pnlSituacao.Enabled = true;
+
+            btnNovo.Enabled = false;
             btnSalvar.Enabled = true;
             btnCancelar.Enabled = true;
-            btnNovo.Enabled = false;
         }
 
         private void LimparCampos()
@@ -84,15 +119,21 @@ namespace SistemaAtendimento.View
         public void DesabilitarCampos()
         {
             LimparCampos();
+
             txtNome.ReadOnly = true;
             txtOrdem.ReadOnly = true;
             pnlSituacao.Enabled = false;
-            btnSalvar.Enabled = false;
+
             btnNovo.Enabled = true;
-            btnCancelar.Enabled = false;
+            btnSalvar.Enabled = false;
             btnEditar.Enabled = false;
             btnExcluir.Enabled = false;
+            btnCancelar.Enabled = false;
+        }
 
+        private void btnNovo_Click(object sender, EventArgs e)
+        {
+            HabilitarCampos();
         }
 
         private void btnCancelar_Click(object sender, EventArgs e)
@@ -100,23 +141,21 @@ namespace SistemaAtendimento.View
             DesabilitarCampos();
         }
 
-        private void dgvEtapa_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
+        private void dgvEtapas_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
         {
             if (e.RowIndex >= 0)
             {
-                DataGridViewRow linhaSelecionada = dgvEtapa.Rows[e.RowIndex];
+                DataGridViewRow row = dgvEtapas.Rows[e.RowIndex];
 
-                txtCodigo.Text = linhaSelecionada.Cells["id"].Value.ToString();
-                txtNome.Text = linhaSelecionada.Cells["nome"].Value.ToString();
-                txtOrdem.Text = linhaSelecionada.Cells["ordem"].Value.ToString();
-                bool ativo = Convert.ToBoolean(linhaSelecionada.Cells["Ativo"].Value);
-                if (ativo)
-                    rdbAtivo.Checked = true;
-                else
-                    rdbInativo.Checked = true;
+                txtCodigo.Text = row.Cells["Id"].Value.ToString();
+                txtNome.Text = row.Cells["Nome"].Value.ToString();
+                txtOrdem.Text = row.Cells["Ordem"].Value.ToString();
+                rdbAtivo.Checked = Convert.ToBoolean(row.Cells["Ativo"].Value);
+                rdbInativo.Checked = !Convert.ToBoolean(row.Cells["Ativo"].Value);
 
-                btnEditar.Enabled = true;
                 btnNovo.Enabled = false;
+                btnEditar.Enabled = true;
+                btnExcluir.Enabled = true;
                 btnCancelar.Enabled = true;
             }
         }
@@ -127,52 +166,28 @@ namespace SistemaAtendimento.View
             btnEditar.Enabled = false;
         }
 
+        private void btnExcluir_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(txtCodigo.Text))
+            {
+                ExibirMensagem("Nenhum etapa selecionada para exclusão.");
+                return;
+            }
+            else
+            {
+                DialogResult resultado = MessageBox.Show($"Deseja Excluir esta Etapa?", "Confirmação", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (resultado == DialogResult.Yes)
+                {
+                    int id = Convert.ToInt32(txtCodigo.Text);
+                    _etapaController.Excluir(id);
+                }
+            }
+        }
+
         private void btnPesquisar_Click(object sender, EventArgs e)
         {
             string termo = txtPesquisar.Text.Trim();
             _etapaController.ListarEtapas(termo);
-        }
-
-        private void dgvEtapa_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
-        {
-            if (e.RowIndex >= 0)
-            {
-                DataGridViewRow linhaSelecionada = dgvEtapa.Rows[e.RowIndex];
-
-                txtCodigo.Text = linhaSelecionada.Cells["id"].Value.ToString();
-                txtNome.Text = linhaSelecionada.Cells["nome"].Value.ToString();
-                txtOrdem.Text = linhaSelecionada.Cells["ordem"].Value.ToString();
-                if (Convert.ToBoolean(linhaSelecionada.Cells["Ativo"].Value))
-                    rdbAtivo.Checked = true;
-                else
-                    rdbInativo.Checked = true;
-
-                btnEditar.Enabled = true;
-                btnNovo.Enabled = false;
-                btnCancelar.Enabled = true;
-                btnExcluir.Enabled = true;
-            }
-        }
-
-        private void btnExcluir_Click(object sender, EventArgs e)
-        {
-            if(string.IsNullOrEmpty(txtCodigo.Text))
-            {
-                ExibirMensagem("Selecione uma etapa para excluir.");
-                return;
-            }
-
-            Etapas etapa = new Etapas()
-            {
-                Id = Convert.ToInt32(txtCodigo.Text)
-            };
-
-            if (!string.IsNullOrEmpty(txtCodigo.Text))
-            {
-                _etapaController.Deletar(etapa);
-                _etapaController.ListarEtapas();
-                DesabilitarCampos();
-            }
         }
     }
 }

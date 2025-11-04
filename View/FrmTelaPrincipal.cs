@@ -11,8 +11,7 @@ namespace SistemaAtendimento
             InitializeComponent();
         }
 
-
-        private void btnConexao_Click_1(object sender, EventArgs e)
+        private void btnConexao_Click(object sender, EventArgs e)
         {
             try
             {
@@ -45,22 +44,28 @@ namespace SistemaAtendimento
             frmCadastroUsuario.ShowDialog();
         }
 
+        private void novoAtendimentoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FrmAtendimento frmAtendimento = new FrmAtendimento();
+            frmAtendimento.ShowDialog();
+        }
+
+        private void consultasToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FrmConsultaAtendimento frmConsultaAtendimento = new FrmConsultaAtendimento();
+            frmConsultaAtendimento.ShowDialog();
+        }
+
         private void etapasToolStripMenuItem_Click(object sender, EventArgs e)
         {
             FrmCadastroEtapa frmCadastroEtapa = new FrmCadastroEtapa();
             frmCadastroEtapa.ShowDialog();
         }
 
-        private void statusAtendimentosToolStripMenuItem_Click(object sender, EventArgs e)
+        private void situacaoAtendimentosToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            FrmCadastroSituacaoAtendimento frmCadastroStatusAtendimento = new FrmCadastroSituacaoAtendimento();
-            frmCadastroStatusAtendimento.ShowDialog();
-        }
-
-        private void novoAtendimentoToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            FrmAtendimento frmAtendimento = new FrmAtendimento();
-            frmAtendimento.ShowDialog();
+            FrmCadastroSituacaoAtendimento frmCadastroSituacaoAtendimento = new FrmCadastroSituacaoAtendimento();
+            frmCadastroSituacaoAtendimento.ShowDialog();
         }
     }
 }

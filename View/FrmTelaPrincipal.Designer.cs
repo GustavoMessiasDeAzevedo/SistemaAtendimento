@@ -29,15 +29,15 @@
         private void InitializeComponent()
         {
             mnuTelaPrincipal = new MenuStrip();
-            cadastroToolStripMenuItem = new ToolStripMenuItem();
+            cadastrosToolStripMenuItem = new ToolStripMenuItem();
             clientesToolStripMenuItem = new ToolStripMenuItem();
             usuáriosToolStripMenuItem = new ToolStripMenuItem();
             etapasToolStripMenuItem = new ToolStripMenuItem();
-            statusAtendimentosToolStripMenuItem = new ToolStripMenuItem();
-            atendimentoToolStripMenuItem = new ToolStripMenuItem();
+            situacaoAtendimentosToolStripMenuItem = new ToolStripMenuItem();
+            atendimentosToolStripMenuItem = new ToolStripMenuItem();
             novoAtendimentoToolStripMenuItem = new ToolStripMenuItem();
             consultasToolStripMenuItem = new ToolStripMenuItem();
-            sistemasToolStripMenuItem = new ToolStripMenuItem();
+            sistemaToolStripMenuItem = new ToolStripMenuItem();
             sairToolStripMenuItem = new ToolStripMenuItem();
             btnConexao = new Button();
             mnuTelaPrincipal.SuspendLayout();
@@ -45,74 +45,75 @@
             // 
             // mnuTelaPrincipal
             // 
-            mnuTelaPrincipal.Items.AddRange(new ToolStripItem[] { cadastroToolStripMenuItem, atendimentoToolStripMenuItem, sistemasToolStripMenuItem });
+            mnuTelaPrincipal.Items.AddRange(new ToolStripItem[] { cadastrosToolStripMenuItem, atendimentosToolStripMenuItem, sistemaToolStripMenuItem });
             mnuTelaPrincipal.Location = new Point(0, 0);
             mnuTelaPrincipal.Name = "mnuTelaPrincipal";
             mnuTelaPrincipal.Size = new Size(800, 24);
             mnuTelaPrincipal.TabIndex = 0;
             mnuTelaPrincipal.Text = "menuStrip1";
             // 
-            // cadastroToolStripMenuItem
+            // cadastrosToolStripMenuItem
             // 
-            cadastroToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { clientesToolStripMenuItem, usuáriosToolStripMenuItem, etapasToolStripMenuItem, statusAtendimentosToolStripMenuItem });
-            cadastroToolStripMenuItem.Name = "cadastroToolStripMenuItem";
-            cadastroToolStripMenuItem.Size = new Size(66, 20);
-            cadastroToolStripMenuItem.Text = "Cadastro";
+            cadastrosToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { clientesToolStripMenuItem, usuáriosToolStripMenuItem, etapasToolStripMenuItem, situacaoAtendimentosToolStripMenuItem });
+            cadastrosToolStripMenuItem.Name = "cadastrosToolStripMenuItem";
+            cadastrosToolStripMenuItem.Size = new Size(71, 20);
+            cadastrosToolStripMenuItem.Text = "Cadastros";
             // 
             // clientesToolStripMenuItem
             // 
             clientesToolStripMenuItem.Name = "clientesToolStripMenuItem";
-            clientesToolStripMenuItem.Size = new Size(197, 22);
+            clientesToolStripMenuItem.Size = new Size(192, 22);
             clientesToolStripMenuItem.Text = "Clientes";
             clientesToolStripMenuItem.Click += clientesToolStripMenuItem_Click;
             // 
             // usuáriosToolStripMenuItem
             // 
             usuáriosToolStripMenuItem.Name = "usuáriosToolStripMenuItem";
-            usuáriosToolStripMenuItem.Size = new Size(197, 22);
+            usuáriosToolStripMenuItem.Size = new Size(192, 22);
             usuáriosToolStripMenuItem.Text = "Usuários";
             usuáriosToolStripMenuItem.Click += usuáriosToolStripMenuItem_Click;
             // 
             // etapasToolStripMenuItem
             // 
             etapasToolStripMenuItem.Name = "etapasToolStripMenuItem";
-            etapasToolStripMenuItem.Size = new Size(197, 22);
+            etapasToolStripMenuItem.Size = new Size(192, 22);
             etapasToolStripMenuItem.Text = "Etapas";
             etapasToolStripMenuItem.Click += etapasToolStripMenuItem_Click;
             // 
-            // statusAtendimentosToolStripMenuItem
+            // situacaoAtendimentosToolStripMenuItem
             // 
-            statusAtendimentosToolStripMenuItem.Name = "statusAtendimentosToolStripMenuItem";
-            statusAtendimentosToolStripMenuItem.Size = new Size(197, 22);
-            statusAtendimentosToolStripMenuItem.Text = "Situação Atendimentos";
-            statusAtendimentosToolStripMenuItem.Click += statusAtendimentosToolStripMenuItem_Click;
+            situacaoAtendimentosToolStripMenuItem.Name = "situacaoAtendimentosToolStripMenuItem";
+            situacaoAtendimentosToolStripMenuItem.Size = new Size(192, 22);
+            situacaoAtendimentosToolStripMenuItem.Text = "Situação Atendimento";
+            situacaoAtendimentosToolStripMenuItem.Click += situacaoAtendimentosToolStripMenuItem_Click;
             // 
-            // atendimentoToolStripMenuItem
+            // atendimentosToolStripMenuItem
             // 
-            atendimentoToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { novoAtendimentoToolStripMenuItem, consultasToolStripMenuItem });
-            atendimentoToolStripMenuItem.Name = "atendimentoToolStripMenuItem";
-            atendimentoToolStripMenuItem.Size = new Size(89, 20);
-            atendimentoToolStripMenuItem.Text = "Atendimento";
+            atendimentosToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { novoAtendimentoToolStripMenuItem, consultasToolStripMenuItem });
+            atendimentosToolStripMenuItem.Name = "atendimentosToolStripMenuItem";
+            atendimentosToolStripMenuItem.Size = new Size(94, 20);
+            atendimentosToolStripMenuItem.Text = "Atendimentos";
             // 
             // novoAtendimentoToolStripMenuItem
             // 
             novoAtendimentoToolStripMenuItem.Name = "novoAtendimentoToolStripMenuItem";
-            novoAtendimentoToolStripMenuItem.Size = new Size(180, 22);
+            novoAtendimentoToolStripMenuItem.Size = new Size(176, 22);
             novoAtendimentoToolStripMenuItem.Text = "Novo Atendimento";
             novoAtendimentoToolStripMenuItem.Click += novoAtendimentoToolStripMenuItem_Click;
             // 
             // consultasToolStripMenuItem
             // 
             consultasToolStripMenuItem.Name = "consultasToolStripMenuItem";
-            consultasToolStripMenuItem.Size = new Size(180, 22);
+            consultasToolStripMenuItem.Size = new Size(176, 22);
             consultasToolStripMenuItem.Text = "Consultas";
+            consultasToolStripMenuItem.Click += consultasToolStripMenuItem_Click;
             // 
-            // sistemasToolStripMenuItem
+            // sistemaToolStripMenuItem
             // 
-            sistemasToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { sairToolStripMenuItem });
-            sistemasToolStripMenuItem.Name = "sistemasToolStripMenuItem";
-            sistemasToolStripMenuItem.Size = new Size(65, 20);
-            sistemasToolStripMenuItem.Text = "Sistemas";
+            sistemaToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { sairToolStripMenuItem });
+            sistemaToolStripMenuItem.Name = "sistemaToolStripMenuItem";
+            sistemaToolStripMenuItem.Size = new Size(60, 20);
+            sistemaToolStripMenuItem.Text = "Sistema";
             // 
             // sairToolStripMenuItem
             // 
@@ -123,13 +124,13 @@
             // 
             // btnConexao
             // 
-            btnConexao.Location = new Point(552, 384);
+            btnConexao.Location = new Point(655, 406);
             btnConexao.Name = "btnConexao";
-            btnConexao.Size = new Size(139, 23);
+            btnConexao.Size = new Size(124, 23);
             btnConexao.TabIndex = 1;
-            btnConexao.Text = "Teste conexão ";
+            btnConexao.Text = "Teste Conexão";
             btnConexao.UseVisualStyleBackColor = true;
-            btnConexao.Click += btnConexao_Click_1;
+            btnConexao.Click += btnConexao_Click;
             // 
             // FrmTelaPrincipal
             // 
@@ -150,13 +151,13 @@
         #endregion
 
         private MenuStrip mnuTelaPrincipal;
-        private ToolStripMenuItem cadastroToolStripMenuItem;
+        private ToolStripMenuItem cadastrosToolStripMenuItem;
         private ToolStripMenuItem clientesToolStripMenuItem;
         private ToolStripMenuItem usuáriosToolStripMenuItem;
         private ToolStripMenuItem etapasToolStripMenuItem;
-        private ToolStripMenuItem statusAtendimentosToolStripMenuItem;
-        private ToolStripMenuItem atendimentoToolStripMenuItem;
-        private ToolStripMenuItem sistemasToolStripMenuItem;
+        private ToolStripMenuItem situacaoAtendimentosToolStripMenuItem;
+        private ToolStripMenuItem atendimentosToolStripMenuItem;
+        private ToolStripMenuItem sistemaToolStripMenuItem;
         private ToolStripMenuItem novoAtendimentoToolStripMenuItem;
         private ToolStripMenuItem consultasToolStripMenuItem;
         private ToolStripMenuItem sairToolStripMenuItem;

@@ -30,211 +30,92 @@
         {
             components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmCadastroUsuario));
-            grbDadosDoUsuário = new GroupBox();
-            txtCodigo = new TextBox();
-            lblCodigo = new Label();
-            cbxPerfil = new ComboBox();
-            lblPerfil = new Label();
-            txtSenha = new TextBox();
-            lblSenha = new Label();
-            txtEmail = new TextBox();
-            lblEmail = new Label();
-            txtNome = new TextBox();
-            lblNome = new Label();
-            grbListaDeUsuario = new GroupBox();
-            dgvUsuario = new DataGridView();
-            btnEditar = new Button();
-            imlIcones = new ImageList(components);
+            grbListaUsuarios = new GroupBox();
+            dgvUsuarios = new DataGridView();
             btnPesquisar = new Button();
+            imageList1 = new ImageList(components);
             txtPesquisar = new TextBox();
             lblPesquisar = new Label();
             btnCancelar = new Button();
             btnExcluir = new Button();
             btnSalvar = new Button();
+            btnEditar = new Button();
             btnNovo = new Button();
-            grbDadosDoUsuário.SuspendLayout();
-            grbListaDeUsuario.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)dgvUsuario).BeginInit();
+            grbDadosUsuario = new GroupBox();
+            txtSenha = new TextBox();
+            lblSenha = new Label();
+            cbxPerfil = new ComboBox();
+            lblPerfil = new Label();
+            txtEmail = new TextBox();
+            lblEmail = new Label();
+            txtNome = new TextBox();
+            lblNome = new Label();
+            lblCodigo = new Label();
+            txtCodigo = new TextBox();
+            grbListaUsuarios.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dgvUsuarios).BeginInit();
+            grbDadosUsuario.SuspendLayout();
             SuspendLayout();
             // 
-            // grbDadosDoUsuário
+            // grbListaUsuarios
             // 
-            grbDadosDoUsuário.Controls.Add(txtCodigo);
-            grbDadosDoUsuário.Controls.Add(lblCodigo);
-            grbDadosDoUsuário.Controls.Add(cbxPerfil);
-            grbDadosDoUsuário.Controls.Add(lblPerfil);
-            grbDadosDoUsuário.Controls.Add(txtSenha);
-            grbDadosDoUsuário.Controls.Add(lblSenha);
-            grbDadosDoUsuário.Controls.Add(txtEmail);
-            grbDadosDoUsuário.Controls.Add(lblEmail);
-            grbDadosDoUsuário.Controls.Add(txtNome);
-            grbDadosDoUsuário.Controls.Add(lblNome);
-            grbDadosDoUsuário.Location = new Point(8, 16);
-            grbDadosDoUsuário.Name = "grbDadosDoUsuário";
-            grbDadosDoUsuário.Size = new Size(688, 160);
-            grbDadosDoUsuário.TabIndex = 0;
-            grbDadosDoUsuário.TabStop = false;
-            grbDadosDoUsuário.Text = "Dados do Usuário";
+            grbListaUsuarios.Controls.Add(dgvUsuarios);
+            grbListaUsuarios.Location = new Point(17, 231);
+            grbListaUsuarios.Name = "grbListaUsuarios";
+            grbListaUsuarios.Size = new Size(767, 243);
+            grbListaUsuarios.TabIndex = 44;
+            grbListaUsuarios.TabStop = false;
+            grbListaUsuarios.Text = "Lista de Usuários";
             // 
-            // txtCodigo
+            // dgvUsuarios
             // 
-            txtCodigo.Location = new Point(16, 48);
-            txtCodigo.Name = "txtCodigo";
-            txtCodigo.ReadOnly = true;
-            txtCodigo.Size = new Size(100, 23);
-            txtCodigo.TabIndex = 10;
-            // 
-            // lblCodigo
-            // 
-            lblCodigo.AutoSize = true;
-            lblCodigo.Location = new Point(16, 32);
-            lblCodigo.Name = "lblCodigo";
-            lblCodigo.Size = new Size(46, 15);
-            lblCodigo.TabIndex = 9;
-            lblCodigo.Text = "Código";
-            // 
-            // cbxPerfil
-            // 
-            cbxPerfil.Enabled = false;
-            cbxPerfil.FormattingEnabled = true;
-            cbxPerfil.Location = new Point(344, 104);
-            cbxPerfil.Name = "cbxPerfil";
-            cbxPerfil.Size = new Size(160, 23);
-            cbxPerfil.TabIndex = 8;
-            // 
-            // lblPerfil
-            // 
-            lblPerfil.AutoSize = true;
-            lblPerfil.Location = new Point(344, 88);
-            lblPerfil.Name = "lblPerfil";
-            lblPerfil.Size = new Size(34, 15);
-            lblPerfil.TabIndex = 6;
-            lblPerfil.Text = "Perfil";
-            // 
-            // txtSenha
-            // 
-            txtSenha.Location = new Point(16, 104);
-            txtSenha.Name = "txtSenha";
-            txtSenha.ReadOnly = true;
-            txtSenha.Size = new Size(312, 23);
-            txtSenha.TabIndex = 5;
-            // 
-            // lblSenha
-            // 
-            lblSenha.AutoSize = true;
-            lblSenha.Location = new Point(16, 88);
-            lblSenha.Name = "lblSenha";
-            lblSenha.Size = new Size(39, 15);
-            lblSenha.TabIndex = 4;
-            lblSenha.Text = "Senha";
-            // 
-            // txtEmail
-            // 
-            txtEmail.Location = new Point(392, 48);
-            txtEmail.Name = "txtEmail";
-            txtEmail.ReadOnly = true;
-            txtEmail.Size = new Size(264, 23);
-            txtEmail.TabIndex = 3;
-            // 
-            // lblEmail
-            // 
-            lblEmail.AutoSize = true;
-            lblEmail.Location = new Point(392, 32);
-            lblEmail.Name = "lblEmail";
-            lblEmail.Size = new Size(36, 15);
-            lblEmail.TabIndex = 2;
-            lblEmail.Text = "Email";
-            // 
-            // txtNome
-            // 
-            txtNome.Location = new Point(128, 48);
-            txtNome.Name = "txtNome";
-            txtNome.ReadOnly = true;
-            txtNome.Size = new Size(248, 23);
-            txtNome.TabIndex = 1;
-            // 
-            // lblNome
-            // 
-            lblNome.AutoSize = true;
-            lblNome.Location = new Point(128, 32);
-            lblNome.Name = "lblNome";
-            lblNome.Size = new Size(40, 15);
-            lblNome.TabIndex = 0;
-            lblNome.Text = "Nome";
-            // 
-            // grbListaDeUsuario
-            // 
-            grbListaDeUsuario.Controls.Add(dgvUsuario);
-            grbListaDeUsuario.Location = new Point(8, 248);
-            grbListaDeUsuario.Name = "grbListaDeUsuario";
-            grbListaDeUsuario.Size = new Size(688, 192);
-            grbListaDeUsuario.TabIndex = 1;
-            grbListaDeUsuario.TabStop = false;
-            grbListaDeUsuario.Text = "Lista de Usuário";
-            // 
-            // dgvUsuario
-            // 
-            dgvUsuario.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvUsuario.Location = new Point(16, 16);
-            dgvUsuario.MultiSelect = false;
-            dgvUsuario.Name = "dgvUsuario";
-            dgvUsuario.ReadOnly = true;
-            dgvUsuario.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dgvUsuario.Size = new Size(672, 160);
-            dgvUsuario.TabIndex = 0;
-            dgvUsuario.CellDoubleClick += dgvUsuario_CellDoubleClick;
-            // 
-            // btnEditar
-            // 
-            btnEditar.Enabled = false;
-            btnEditar.ImageAlign = ContentAlignment.MiddleLeft;
-            btnEditar.ImageIndex = 2;
-            btnEditar.ImageList = imlIcones;
-            btnEditar.Location = new Point(96, 208);
-            btnEditar.Name = "btnEditar";
-            btnEditar.Size = new Size(80, 31);
-            btnEditar.TabIndex = 22;
-            btnEditar.Text = "Editar";
-            btnEditar.UseVisualStyleBackColor = true;
-            btnEditar.Click += btnEditar_Click;
-            // 
-            // imlIcones
-            // 
-            imlIcones.ColorDepth = ColorDepth.Depth32Bit;
-            imlIcones.ImageStream = (ImageListStreamer)resources.GetObject("imlIcones.ImageStream");
-            imlIcones.TransparentColor = Color.Transparent;
-            imlIcones.Images.SetKeyName(0, "icone-cancelar.png");
-            imlIcones.Images.SetKeyName(1, "icone-delete.png");
-            imlIcones.Images.SetKeyName(2, "icone-editar.png");
-            imlIcones.Images.SetKeyName(3, "icone-novo.png");
-            imlIcones.Images.SetKeyName(4, "icone-pesquisar.png");
-            imlIcones.Images.SetKeyName(5, "icone-salvar.png");
+            dgvUsuarios.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgvUsuarios.Location = new Point(6, 22);
+            dgvUsuarios.MultiSelect = false;
+            dgvUsuarios.Name = "dgvUsuarios";
+            dgvUsuarios.ReadOnly = true;
+            dgvUsuarios.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgvUsuarios.Size = new Size(755, 215);
+            dgvUsuarios.TabIndex = 0;
+            dgvUsuarios.CellMouseDoubleClick += dgvUsuarios_CellMouseDoubleClick;
             // 
             // btnPesquisar
             // 
             btnPesquisar.ImageIndex = 4;
-            btnPesquisar.ImageList = imlIcones;
-            btnPesquisar.Location = new Point(663, 206);
+            btnPesquisar.ImageList = imageList1;
+            btnPesquisar.Location = new Point(736, 191);
             btnPesquisar.Name = "btnPesquisar";
-            btnPesquisar.Size = new Size(32, 31);
-            btnPesquisar.TabIndex = 27;
+            btnPesquisar.Size = new Size(48, 23);
+            btnPesquisar.TabIndex = 51;
             btnPesquisar.UseVisualStyleBackColor = true;
             btnPesquisar.Click += btnPesquisar_Click;
             // 
+            // imageList1
+            // 
+            imageList1.ColorDepth = ColorDepth.Depth32Bit;
+            imageList1.ImageStream = (ImageListStreamer)resources.GetObject("imageList1.ImageStream");
+            imageList1.TransparentColor = Color.Transparent;
+            imageList1.Images.SetKeyName(0, "icone-cancelar.png");
+            imageList1.Images.SetKeyName(1, "icone-editar.png");
+            imageList1.Images.SetKeyName(2, "icone-excluir.png");
+            imageList1.Images.SetKeyName(3, "icone-novo.png");
+            imageList1.Images.SetKeyName(4, "icone-pesquisar.png");
+            imageList1.Images.SetKeyName(5, "icone-salvar.png");
+            // 
             // txtPesquisar
             // 
-            txtPesquisar.Location = new Point(471, 214);
+            txtPesquisar.Location = new Point(498, 191);
             txtPesquisar.Name = "txtPesquisar";
-            txtPesquisar.Size = new Size(184, 23);
-            txtPesquisar.TabIndex = 26;
+            txtPesquisar.Size = new Size(231, 23);
+            txtPesquisar.TabIndex = 50;
             // 
             // lblPesquisar
             // 
             lblPesquisar.AutoSize = true;
-            lblPesquisar.Location = new Point(471, 198);
+            lblPesquisar.Location = new Point(498, 173);
             lblPesquisar.Name = "lblPesquisar";
             lblPesquisar.Size = new Size(57, 15);
-            lblPesquisar.TabIndex = 20;
+            lblPesquisar.TabIndex = 43;
             lblPesquisar.Text = "Pesquisar";
             // 
             // btnCancelar
@@ -242,12 +123,13 @@
             btnCancelar.Enabled = false;
             btnCancelar.ImageAlign = ContentAlignment.MiddleLeft;
             btnCancelar.ImageIndex = 0;
-            btnCancelar.ImageList = imlIcones;
-            btnCancelar.Location = new Point(368, 208);
+            btnCancelar.ImageList = imageList1;
+            btnCancelar.Location = new Point(340, 185);
             btnCancelar.Name = "btnCancelar";
-            btnCancelar.Size = new Size(96, 31);
-            btnCancelar.TabIndex = 25;
+            btnCancelar.Size = new Size(86, 29);
+            btnCancelar.TabIndex = 49;
             btnCancelar.Text = "Cancelar";
+            btnCancelar.TextAlign = ContentAlignment.MiddleRight;
             btnCancelar.UseVisualStyleBackColor = true;
             btnCancelar.Click += btnCancelar_Click;
             // 
@@ -255,13 +137,14 @@
             // 
             btnExcluir.Enabled = false;
             btnExcluir.ImageAlign = ContentAlignment.MiddleLeft;
-            btnExcluir.ImageIndex = 1;
-            btnExcluir.ImageList = imlIcones;
-            btnExcluir.Location = new Point(272, 208);
+            btnExcluir.ImageIndex = 2;
+            btnExcluir.ImageList = imageList1;
+            btnExcluir.Location = new Point(259, 185);
             btnExcluir.Name = "btnExcluir";
-            btnExcluir.Size = new Size(88, 31);
-            btnExcluir.TabIndex = 24;
+            btnExcluir.Size = new Size(75, 29);
+            btnExcluir.TabIndex = 48;
             btnExcluir.Text = "Excluir";
+            btnExcluir.TextAlign = ContentAlignment.MiddleRight;
             btnExcluir.UseVisualStyleBackColor = true;
             btnExcluir.Click += btnExcluir_Click;
             // 
@@ -270,77 +153,204 @@
             btnSalvar.Enabled = false;
             btnSalvar.ImageAlign = ContentAlignment.MiddleLeft;
             btnSalvar.ImageIndex = 5;
-            btnSalvar.ImageList = imlIcones;
-            btnSalvar.Location = new Point(184, 208);
+            btnSalvar.ImageList = imageList1;
+            btnSalvar.Location = new Point(178, 185);
             btnSalvar.Name = "btnSalvar";
-            btnSalvar.Size = new Size(80, 31);
-            btnSalvar.TabIndex = 23;
+            btnSalvar.Size = new Size(75, 29);
+            btnSalvar.TabIndex = 47;
             btnSalvar.Text = "Salvar";
+            btnSalvar.TextAlign = ContentAlignment.MiddleRight;
             btnSalvar.UseVisualStyleBackColor = true;
             btnSalvar.Click += btnSalvar_Click;
+            // 
+            // btnEditar
+            // 
+            btnEditar.Enabled = false;
+            btnEditar.ImageAlign = ContentAlignment.MiddleLeft;
+            btnEditar.ImageIndex = 1;
+            btnEditar.ImageList = imageList1;
+            btnEditar.Location = new Point(97, 185);
+            btnEditar.Name = "btnEditar";
+            btnEditar.Size = new Size(75, 29);
+            btnEditar.TabIndex = 46;
+            btnEditar.Text = "Editar";
+            btnEditar.TextAlign = ContentAlignment.MiddleRight;
+            btnEditar.UseVisualStyleBackColor = true;
+            btnEditar.Click += btnEditar_Click;
             // 
             // btnNovo
             // 
             btnNovo.ImageAlign = ContentAlignment.MiddleLeft;
             btnNovo.ImageIndex = 3;
-            btnNovo.ImageList = imlIcones;
-            btnNovo.Location = new Point(8, 208);
+            btnNovo.ImageList = imageList1;
+            btnNovo.Location = new Point(16, 185);
             btnNovo.Name = "btnNovo";
-            btnNovo.Size = new Size(80, 31);
-            btnNovo.TabIndex = 21;
+            btnNovo.Size = new Size(75, 29);
+            btnNovo.TabIndex = 45;
             btnNovo.Text = "Novo";
+            btnNovo.TextAlign = ContentAlignment.MiddleRight;
             btnNovo.UseVisualStyleBackColor = true;
             btnNovo.Click += btnNovo_Click;
+            // 
+            // grbDadosUsuario
+            // 
+            grbDadosUsuario.Controls.Add(txtSenha);
+            grbDadosUsuario.Controls.Add(lblSenha);
+            grbDadosUsuario.Controls.Add(cbxPerfil);
+            grbDadosUsuario.Controls.Add(lblPerfil);
+            grbDadosUsuario.Controls.Add(txtEmail);
+            grbDadosUsuario.Controls.Add(lblEmail);
+            grbDadosUsuario.Controls.Add(txtNome);
+            grbDadosUsuario.Controls.Add(lblNome);
+            grbDadosUsuario.Controls.Add(lblCodigo);
+            grbDadosUsuario.Controls.Add(txtCodigo);
+            grbDadosUsuario.Location = new Point(16, 12);
+            grbDadosUsuario.Name = "grbDadosUsuario";
+            grbDadosUsuario.Size = new Size(768, 141);
+            grbDadosUsuario.TabIndex = 42;
+            grbDadosUsuario.TabStop = false;
+            grbDadosUsuario.Text = "Dados do Usuário";
+            // 
+            // txtSenha
+            // 
+            txtSenha.Location = new Point(288, 93);
+            txtSenha.Name = "txtSenha";
+            txtSenha.ReadOnly = true;
+            txtSenha.Size = new Size(234, 23);
+            txtSenha.TabIndex = 10;
+            // 
+            // lblSenha
+            // 
+            lblSenha.AutoSize = true;
+            lblSenha.Location = new Point(288, 75);
+            lblSenha.Name = "lblSenha";
+            lblSenha.Size = new Size(39, 15);
+            lblSenha.TabIndex = 11;
+            lblSenha.Text = "Senha";
+            // 
+            // cbxPerfil
+            // 
+            cbxPerfil.Enabled = false;
+            cbxPerfil.FormattingEnabled = true;
+            cbxPerfil.Items.AddRange(new object[] { "Usuário", "Administrador" });
+            cbxPerfil.Location = new Point(526, 93);
+            cbxPerfil.Name = "cbxPerfil";
+            cbxPerfil.Size = new Size(218, 23);
+            cbxPerfil.TabIndex = 9;
+            // 
+            // lblPerfil
+            // 
+            lblPerfil.AutoSize = true;
+            lblPerfil.Location = new Point(526, 75);
+            lblPerfil.Name = "lblPerfil";
+            lblPerfil.Size = new Size(34, 15);
+            lblPerfil.TabIndex = 8;
+            lblPerfil.Text = "Perfil";
+            // 
+            // txtEmail
+            // 
+            txtEmail.Location = new Point(15, 93);
+            txtEmail.Name = "txtEmail";
+            txtEmail.ReadOnly = true;
+            txtEmail.Size = new Size(268, 23);
+            txtEmail.TabIndex = 3;
+            // 
+            // lblEmail
+            // 
+            lblEmail.AutoSize = true;
+            lblEmail.Location = new Point(15, 75);
+            lblEmail.Name = "lblEmail";
+            lblEmail.Size = new Size(36, 15);
+            lblEmail.TabIndex = 6;
+            lblEmail.Text = "Email";
+            // 
+            // txtNome
+            // 
+            txtNome.Location = new Point(121, 37);
+            txtNome.Name = "txtNome";
+            txtNome.ReadOnly = true;
+            txtNome.Size = new Size(627, 23);
+            txtNome.TabIndex = 1;
+            // 
+            // lblNome
+            // 
+            lblNome.AutoSize = true;
+            lblNome.Location = new Point(121, 19);
+            lblNome.Name = "lblNome";
+            lblNome.Size = new Size(40, 15);
+            lblNome.TabIndex = 2;
+            lblNome.Text = "Nome";
+            // 
+            // lblCodigo
+            // 
+            lblCodigo.AutoSize = true;
+            lblCodigo.Location = new Point(15, 19);
+            lblCodigo.Name = "lblCodigo";
+            lblCodigo.Size = new Size(46, 15);
+            lblCodigo.TabIndex = 1;
+            lblCodigo.Text = "Código";
+            // 
+            // txtCodigo
+            // 
+            txtCodigo.Enabled = false;
+            txtCodigo.Location = new Point(15, 37);
+            txtCodigo.Name = "txtCodigo";
+            txtCodigo.ReadOnly = true;
+            txtCodigo.Size = new Size(100, 23);
+            txtCodigo.TabIndex = 0;
             // 
             // FrmCadastroUsuario
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(703, 450);
-            Controls.Add(btnEditar);
+            ClientSize = new Size(800, 489);
+            Controls.Add(grbListaUsuarios);
             Controls.Add(btnPesquisar);
             Controls.Add(txtPesquisar);
             Controls.Add(lblPesquisar);
             Controls.Add(btnCancelar);
             Controls.Add(btnExcluir);
             Controls.Add(btnSalvar);
+            Controls.Add(btnEditar);
             Controls.Add(btnNovo);
-            Controls.Add(grbListaDeUsuario);
-            Controls.Add(grbDadosDoUsuário);
+            Controls.Add(grbDadosUsuario);
+            MaximizeBox = false;
+            MinimizeBox = false;
             Name = "FrmCadastroUsuario";
-            Text = "Cadastro de Usuario";
+            StartPosition = FormStartPosition.CenterScreen;
+            Text = "Cadastro de Usuários";
             Load += FrmCadastroUsuario_Load;
-            grbDadosDoUsuário.ResumeLayout(false);
-            grbDadosDoUsuário.PerformLayout();
-            grbListaDeUsuario.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)dgvUsuario).EndInit();
+            grbListaUsuarios.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)dgvUsuarios).EndInit();
+            grbDadosUsuario.ResumeLayout(false);
+            grbDadosUsuario.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
 
         #endregion
 
-        private GroupBox grbDadosDoUsuário;
-        private Label lblPerfil;
-        private TextBox txtSenha;
-        private Label lblSenha;
-        private TextBox txtEmail;
-        private Label lblEmail;
-        private TextBox txtNome;
-        private Label lblNome;
-        private GroupBox grbListaDeUsuario;
-        private DataGridView dgvUsuario;
-        private Button btnEditar;
+        private GroupBox grbListaUsuarios;
+        private DataGridView dgvUsuarios;
         private Button btnPesquisar;
         private TextBox txtPesquisar;
         private Label lblPesquisar;
         private Button btnCancelar;
         private Button btnExcluir;
         private Button btnSalvar;
+        private Button btnEditar;
         private Button btnNovo;
-        private ImageList imlIcones;
-        private ComboBox cbxPerfil;
-        private TextBox txtCodigo;
+        private GroupBox grbDadosUsuario;
+        private TextBox txtEmail;
+        private Label lblEmail;
+        private TextBox txtNome;
+        private Label lblNome;
         private Label lblCodigo;
+        private TextBox txtCodigo;
+        private ComboBox cbxPerfil;
+        private Label lblPerfil;
+        private ImageList imageList1;
+        private TextBox txtSenha;
+        private Label lblSenha;
     }
 }

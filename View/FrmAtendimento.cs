@@ -1,14 +1,26 @@
-﻿using SistemaAtendimento.Model;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+using SistemaAtendimento.Controller;
+using SistemaAtendimento.Model;
 
 namespace SistemaAtendimento.View
 {
     public partial class FrmAtendimento : Form
     {
 
+        private AtendimentoController _atendimentoController;
 
         public FrmAtendimento()
         {
             InitializeComponent();
+            _atendimentoController = new AtendimentoController(this);
         }
 
 
@@ -17,6 +29,53 @@ namespace SistemaAtendimento.View
             FrmConsultaAtendimento frmConsultaAtendimento = new FrmConsultaAtendimento();
             frmConsultaAtendimento.ShowDialog();
         }
+
+
+        private void CarregarClientes()
+        {
+            var clientes = _atendimentoController.ListarClientes();
+
+            cbxNomeCliente.DataSource = clientes;
+            cbxNomeCliente.DisplayMember = "Nome";
+            cbxNomeCliente.SelectedIndex = -1;
+            cbxNomeCliente.ValueMember = "Id";
+            //Filtros no Combobox
+            cbxNomeCliente.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            cbxNomeCliente.AutoCompleteSource = AutoCompleteSource.ListItems;
+
+        }
+
+        private void CarregarEtapas()
+        {
+            var etapas = _atendimentoController.ListarEtapas();
+
+            cbxEtapaAtendimento.DataSource = etapas;
+            cbxEtapaAtendimento.DisplayMember = "Nome";
+            cbxEtapaAtendimento.SelectedIndex = -1;
+            cbxEtapaAtendimento.ValueMember = "Id";
+
+
+        }
+
+        private void CarregarSituacaoAtendimento()
+        {
+            var situacaoAtendimentos = _atendimentoController.ListarSituacaoAtendimento();
+
+            cbxSituacaoAtendimento.DataSource = situacaoAtendimentos;
+            cbxSituacaoAtendimento.DisplayMember = "Nome";
+            cbxSituacaoAtendimento.SelectedIndex = -1;
+            cbxSituacaoAtendimento.ValueMember = "Id";
+
+
+        }
+
+        private void FrmAtendimento_Load(object sender, EventArgs e)
+        {
+            CarregarClientes();
+            CarregarEtapas();
+            CarregarSituacaoAtendimento();
+        }
+
 
         private void btnNovo_Click(object sender, EventArgs e)
         {
@@ -29,57 +88,101 @@ namespace SistemaAtendimento.View
             dtpAberturaAtendimento.Enabled = true;
             cbxSituacaoAtendimento.Enabled = true;
             txtObservacaoAtendimento.ReadOnly = false;
-
             btnNovo.Enabled = false;
             btnSalvar.Enabled = true;
             btnCancelar.Enabled = true;
+
         }
 
-        private void DesabilitarCampos()
+        private void btnCancelar_Click(object sender, EventArgs e)
         {
+            DesativarCampos();
+        }
+
+        private void DesativarCampos()
+        {
+            LimparCampos();
             cbxNomeCliente.Enabled = false;
             dtpAberturaAtendimento.Enabled = false;
             cbxSituacaoAtendimento.Enabled = false;
             txtObservacaoAtendimento.ReadOnly = true;
-
             btnNovo.Enabled = true;
             btnSalvar.Enabled = false;
             btnCancelar.Enabled = false;
         }
 
-        private void btnCancelar_Click(object sender, EventArgs e)
-        {
-            LimparCampos();
-            DesabilitarCampos();
-        }
-
         private void LimparCampos()
         {
-            cbxEtapaAtendimento.SelectedIndex = -1;
+            txtCodigoCliente.Clear();
+            cbxNomeCliente.SelectedIndex = -1;
+            cbxSituacaoAtendimento.SelectedIndex = -1;
             txtObservacaoAtendimento.Clear();
             dtpAberturaAtendimento.Value = DateTime.Now;
-            cbxSituacaoAtendimento.SelectedIndex = -1;
         }
 
         private void btnSalvar_Click(object sender, EventArgs e)
         {
+
+
             Atendimentos atendimento = new Atendimentos
             {
-                ClienteId = Convert.ToInt32(txtCodigoCliente.Text),
+                ClienteId = string.IsNullOrWhiteSpace(txtCodigoCliente.Text) ? null : Convert.ToInt32(txtCodigoCliente.Text),
                 UsuarioId = 1,
-                SituacaoAtendimentoId = Convert.ToInt32(cbxSituacaoAtendimento.SelectedValue),
+                SituacaoAtendimentoId = cbxSituacaoAtendimento.SelectedValue == null ? null : Convert.ToInt32(cbxSituacaoAtendimento.SelectedValue),
                 DataAbertura = dtpAberturaAtendimento.Value,
                 Observacao = txtObservacaoAtendimento.Text
             };
+
             if (!ValidarDados(atendimento))
                 return;
+
+            _atendimentoController.Salvar(atendimento);
+            LimparCampos();
+
         }
 
         private bool ValidarDados(Atendimentos atendimento)
         {
-            //Criar Regras de validação de campos
+            //Criar Regras de Validação de Campos
+            if (string.IsNullOrWhiteSpace(txtCodigoCliente.Text))
+            {
+                ExibirMensagem("Selecione um Cliente");
+                cbxNomeCliente.Focus();
+                return false;
+            }
+
+            if (cbxSituacaoAtendimento.SelectedValue == null)
+            {
+                ExibirMensagem("Selecione uma Situação do Atendimento");
+                cbxSituacaoAtendimento.Focus();
+                return false;
+            }
+
+            if (string.IsNullOrWhiteSpace(txtObservacaoAtendimento.Text))
+            {
+                ExibirMensagem("Digite uma observação do Atendimento");
+                txtObservacaoAtendimento.Focus();
+                return false;
+
+            }
+
 
             return true;
+        }
+
+        public void ExibirMensagem(string mensagem)
+        {
+            MessageBox.Show(mensagem);
+        }
+
+        private void cbxNomeCliente_SelectedIndexChanged_1(object sender, EventArgs e)
+        {
+            txtCodigoCliente.Clear();
+
+            if (cbxNomeCliente.SelectedValue != null)
+            {
+                txtCodigoCliente.Text = cbxNomeCliente.SelectedValue.ToString();
+            }
         }
     }
 }

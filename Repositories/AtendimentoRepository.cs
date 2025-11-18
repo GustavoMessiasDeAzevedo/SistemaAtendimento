@@ -95,7 +95,11 @@ namespace SistemaAtendimento.Repositories
             return lista;
         }
 
-
+        public Atendimentos? BuscarPorId(int id)
+        {
+            var resultado = Listar(id.ToString(), "Código do Atendimento");
+            return resultado.FirstOrDefault();
+        }
 
         public void Inserir(Atendimentos atendimento)
         {

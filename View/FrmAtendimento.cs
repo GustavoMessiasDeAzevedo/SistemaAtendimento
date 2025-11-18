@@ -17,10 +17,14 @@ namespace SistemaAtendimento.View
 
         private AtendimentoController _atendimentoController;
 
-        public FrmAtendimento()
+        private int? _atendimentoId;
+
+        public FrmAtendimento(int? atendimentoId = null)
         {
             InitializeComponent();
             _atendimentoController = new AtendimentoController(this);
+            _atendimentoId = atendimentoId;
+
         }
 
 
@@ -74,8 +78,41 @@ namespace SistemaAtendimento.View
             CarregarClientes();
             CarregarEtapas();
             CarregarSituacaoAtendimento();
+            //FrmConsultaAtendimento frmConsultaAtendimento = new FrmConsultaAtendimento();
+            //frmConsultaAtendimento.Hide();
+
+            if (_atendimentoId.HasValue)
+            {
+                var atendimento = _atendimentoController.BuscarAtendimentoPorId(_atendimentoId.Value);
+
+                if (atendimento != null)
+                {
+                    PreencherCampos(atendimento);
+                    HabilitarCamposConsulta();
+                }
+            }
         }
 
+        private void HabilitarCamposConsulta()
+        {
+            btnNovo.Enabled = false;
+            btnSalvar.Enabled = true;
+            btnExcluir.Enabled = true;
+            btnCancelar.Enabled = true;
+            btnFinalizar.Enabled = true;
+            cbxSituacaoAtendimento.Enabled = true;
+            txtObservacaoAtendimento.ReadOnly = false;
+        }
+        private void PreencherCampos(Atendimentos atendimento)
+        {
+            txtCodigoAtendimento.Text = atendimento.Id.ToString();
+            txtCodigoCliente.Text = atendimento.ClienteId.ToString();
+            cbxNomeCliente.SelectedValue = atendimento.ClienteId;
+            cbxSituacaoAtendimento.SelectedValue = atendimento.SituacaoAtendimentoId;
+            dtpAberturaAtendimento.Value = atendimento.DataAbertura ?? DateTime.Now;
+            txtObservacaoAtendimento.Text = atendimento.Observacao;
+        }
+        
 
         private void btnNovo_Click(object sender, EventArgs e)
         {

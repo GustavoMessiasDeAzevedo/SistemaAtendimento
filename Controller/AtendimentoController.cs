@@ -55,5 +55,10 @@ namespace SistemaAtendimento.Controller
             }
         }
 
+        public Atendimentos? BuscarAtendimentoPorId(int id)
+        {
+            return _atendimentoRepository.BuscarPorId(id);
+        }
+
     }
 }

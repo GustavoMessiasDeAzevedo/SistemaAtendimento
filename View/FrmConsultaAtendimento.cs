@@ -44,5 +44,20 @@ namespace SistemaAtendimento.View
             string condicao = cbxFiltro.Text.Trim();
             _consultaAtendimentoController.ListarAtendimento(termo, condicao);
         }
+
+        private void dgvConsultaAtendimento_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            
+            if (e.RowIndex >= 0)
+            {
+                
+                int id = (int)dgvConsultaAtendimento.Rows[e.RowIndex].Cells["Id"].Value;
+                //MessageBox.Show(id.ToString());
+                FrmAtendimento frmAtendimento = new FrmAtendimento(id);
+                this.Hide();
+                frmAtendimento.Show();
+            }
+            
+        }
     }
 }

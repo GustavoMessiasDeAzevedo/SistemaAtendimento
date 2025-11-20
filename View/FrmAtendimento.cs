@@ -163,6 +163,7 @@ namespace SistemaAtendimento.View
 
             Atendimentos atendimento = new Atendimentos
             {
+                Id = _atendimentoId ?? null,
                 ClienteId = string.IsNullOrWhiteSpace(txtCodigoCliente.Text) ? null : Convert.ToInt32(txtCodigoCliente.Text),
                 UsuarioId = 1,
                 SituacaoAtendimentoId = cbxSituacaoAtendimento.SelectedValue == null ? null : Convert.ToInt32(cbxSituacaoAtendimento.SelectedValue),
@@ -173,7 +174,15 @@ namespace SistemaAtendimento.View
             if (!ValidarDados(atendimento))
                 return;
 
-            _atendimentoController.Salvar(atendimento);
+            if (_atendimentoId.HasValue && _atendimentoId > 0)
+            {
+                _atendimentoController.Atualizar(atendimento);
+            }else
+            {
+                _atendimentoController.Salvar(atendimento);
+            }
+
+                _atendimentoController.Salvar(atendimento);
             LimparCampos();
 
         }

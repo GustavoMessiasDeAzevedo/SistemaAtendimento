@@ -112,7 +112,7 @@ namespace SistemaAtendimento.View
             dtpAberturaAtendimento.Value = atendimento.DataAbertura ?? DateTime.Now;
             txtObservacaoAtendimento.Text = atendimento.Observacao;
         }
-        
+
 
         private void btnNovo_Click(object sender, EventArgs e)
         {
@@ -151,6 +151,7 @@ namespace SistemaAtendimento.View
         private void LimparCampos()
         {
             txtCodigoCliente.Clear();
+            txtCodigoAtendimento.Clear();
             cbxNomeCliente.SelectedIndex = -1;
             cbxSituacaoAtendimento.SelectedIndex = -1;
             txtObservacaoAtendimento.Clear();
@@ -177,13 +178,14 @@ namespace SistemaAtendimento.View
             if (_atendimentoId.HasValue && _atendimentoId > 0)
             {
                 _atendimentoController.Atualizar(atendimento);
-            }else
-            {
-                _atendimentoController.Salvar(atendimento);
             }
-
-                _atendimentoController.Salvar(atendimento);
-            LimparCampos();
+            else
+            {
+                int? atendimentoId = _atendimentoController.Salvar(atendimento);
+                txtCodigoAtendimento.Text = atendimentoId.ToString();
+                _atendimentoId = atendimentoId;
+                btnExcluir.Enabled = true;
+            }
 
         }
 
@@ -228,6 +230,29 @@ namespace SistemaAtendimento.View
             if (cbxNomeCliente.SelectedValue != null)
             {
                 txtCodigoCliente.Text = cbxNomeCliente.SelectedValue.ToString();
+            }
+        }
+
+        private void btnExcluir_Click(object sender, EventArgs e)
+        {
+            if(string.IsNullOrEmpty(txtCodigoAtendimento.Text))
+            {
+                ExibirMensagem("Nenhum atendimento selecionado para exclusão.");
+                return;
+            }
+
+            DialogResult resultado = MessageBox.Show("Tem certeza que deseja excluir este atendimento?", "Confirmação de Exclusão", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            
+            if (resultado == DialogResult.Yes)
+            {
+                int id = Convert.ToInt32(txtCodigoAtendimento.Text);
+                _atendimentoController.Excluir(id);
+                LimparCampos();
+                btnNovo.Enabled = true;
+                btnSalvar.Enabled = false;
+                btnCancelar.Enabled = false;
+                btnFinalizar.Enabled = false;
+                btnExcluir.Enabled = false;
             }
         }
     }

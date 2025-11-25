@@ -42,17 +42,20 @@ namespace SistemaAtendimento.Controller
         }
 
 
-        public void Salvar(Atendimentos atendimento)
+        public int? Salvar(Atendimentos atendimento)
         {
+            int? atendimentoId = null;
             try
             {
-                _atendimentoRepository.Inserir(atendimento);
+                atendimentoId = _atendimentoRepository.Inserir(atendimento);
                 _frmAtendimento.ExibirMensagem("Atendimento Salvo com Sucesso!");
+                
             }
             catch (Exception ex)
             {
                 _frmAtendimento.ExibirMensagem($"Erro ao Cadastrar o Atendimento: {ex.Message}");
             }
+            return atendimentoId;
         }
 
         public void Atualizar(Atendimentos atendimento)
@@ -71,6 +74,19 @@ namespace SistemaAtendimento.Controller
         public Atendimentos? BuscarAtendimentoPorId(int id)
         {
             return _atendimentoRepository.BuscarPorId(id);
+        }
+
+        public void Excluir(int id)
+        {
+            try
+            {
+                _atendimentoRepository.Excluir(id);
+                _frmAtendimento.ExibirMensagem("Atendimento Excluído com Sucesso!");
+            }
+            catch(Exception ex)
+            {
+                _frmAtendimento.ExibirMensagem($"Erro ao Excluir o Atendimento: {ex.Message}");
+            }
         }
 
     }

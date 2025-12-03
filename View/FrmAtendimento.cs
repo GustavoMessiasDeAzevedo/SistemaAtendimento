@@ -16,6 +16,7 @@ namespace SistemaAtendimento.View
     {
 
         private AtendimentoController _atendimentoController;
+        private EtapasAtendimentoController _etapasAtendimentoController;
 
         private int? _atendimentoId;
 
@@ -23,6 +24,7 @@ namespace SistemaAtendimento.View
         {
             InitializeComponent();
             _atendimentoController = new AtendimentoController(this);
+            _etapasAtendimentoController = new EtapasAtendimentoController(this);
             _atendimentoId = atendimentoId;
 
         }
@@ -89,6 +91,10 @@ namespace SistemaAtendimento.View
                 {
                     PreencherCampos(atendimento);
                     HabilitarCamposConsulta();
+
+                    grbEtapasAtendimento.Enabled = true;
+                    CarregarEtapasAtendimento();
+
                 }
             }
         }
@@ -185,6 +191,8 @@ namespace SistemaAtendimento.View
                 txtCodigoAtendimento.Text = atendimentoId.ToString();
                 _atendimentoId = atendimentoId;
                 btnExcluir.Enabled = true;
+                grbEtapasAtendimento.Enabled = true;
+                CarregarEtapasAtendimento();
             }
 
         }
@@ -235,14 +243,14 @@ namespace SistemaAtendimento.View
 
         private void btnExcluir_Click(object sender, EventArgs e)
         {
-            if(string.IsNullOrEmpty(txtCodigoAtendimento.Text))
+            if (string.IsNullOrEmpty(txtCodigoAtendimento.Text))
             {
                 ExibirMensagem("Nenhum atendimento selecionado para exclusão.");
                 return;
             }
 
             DialogResult resultado = MessageBox.Show("Tem certeza que deseja excluir este atendimento?", "Confirmação de Exclusão", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-            
+
             if (resultado == DialogResult.Yes)
             {
                 int id = Convert.ToInt32(txtCodigoAtendimento.Text);
@@ -253,6 +261,71 @@ namespace SistemaAtendimento.View
                 btnCancelar.Enabled = false;
                 btnFinalizar.Enabled = false;
                 btnExcluir.Enabled = false;
+            }
+        }
+
+        private void CarregarEtapasAtendimento()
+        {
+            if (!_atendimentoId.HasValue)
+            {
+                return;
+            }
+
+            dgvEtapasAtendimento.DataSource = _etapasAtendimentoController.Listar(_atendimentoId.Value);
+        }
+
+        private void btnAdicionarEtapa_Click(object sender, EventArgs e)
+        {
+            if (!_atendimentoId.HasValue)
+            {
+                MessageBox.Show("Salve o atendimento antes de adicionar etapas.");
+                return;
+            }
+
+            if (cbxEtapaAtendimento.SelectedValue == null)
+            {
+                MessageBox.Show("Selecione uma etapa.");
+                return;
+            }
+
+            if (string.IsNullOrEmpty(txtEtapaObservacao.Text))
+            {
+                ExibirMensagem("Digite uma observação do Atendimento");
+                txtEtapaObservacao.Focus();
+                return;
+            }
+
+            var etapaAtendimento = new EtapasAtendimentos()
+            {
+                AtendimentoId = _atendimentoId.Value,
+                EtapaId = Convert.ToInt32(cbxEtapaAtendimento.SelectedValue),
+                UsuarioId = 1,
+                DataCadastro = DateTime.Now,
+                Observacao = txtEtapaObservacao.Text
+            };
+
+            _etapasAtendimentoController.Salvar(etapaAtendimento);
+            CarregarEtapasAtendimento();
+            cbxEtapaAtendimento.SelectedIndex = -1;
+            txtEtapaObservacao.Clear();
+
+        }
+
+        private void btnExcluirEtapa_Click(object sender, EventArgs e)
+        {
+            if (dgvEtapasAtendimento.SelectedRows.Count == 0)
+            {
+                ExibirMensagem("Selecione uma etapa para excluir.");
+                return;
+            }
+
+            int id = Convert.ToInt32(dgvEtapasAtendimento.SelectedRows[0].Cells["Id"].Value);
+            var confirmar = MessageBox.Show("Tem certeza que deseja excluir esta etapa?", "Confirmação de Exclusão", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+            if (confirmar == DialogResult.Yes)
+            {
+                _etapasAtendimentoController.Excluir(id);
+                CarregarEtapasAtendimento();
             }
         }
     }

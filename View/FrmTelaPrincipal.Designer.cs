@@ -142,6 +142,7 @@
             MainMenuStrip = mnuTelaPrincipal;
             Name = "FrmTelaPrincipal";
             Text = "Sistema de Atendimento";
+            FormClosed += FrmTelaPrincipal_FormClosed;
             mnuTelaPrincipal.ResumeLayout(false);
             mnuTelaPrincipal.PerformLayout();
             ResumeLayout(false);

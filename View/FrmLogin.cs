@@ -21,7 +21,6 @@ namespace SistemaAtendimento.View
             InitializeComponent();
 
             _usuarioController = new UsuarioController(null);
-            _frmTelaPrincipal = new FrmTelaPrincipal();
         }
 
         private void btnEntrar_Click(object sender, EventArgs e)
@@ -32,7 +31,7 @@ namespace SistemaAtendimento.View
             {
                 MessageBox.Show($"Bem-vindo, {usuario.Nome}!", "Login Bem-Sucedido", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                FrmTelaPrincipal frmTelaPrincipal = new FrmTelaPrincipal();
+                FrmTelaPrincipal frmTelaPrincipal = new FrmTelaPrincipal(usuario);
                 frmTelaPrincipal.ShowDialog();
                 this.Hide();
             }

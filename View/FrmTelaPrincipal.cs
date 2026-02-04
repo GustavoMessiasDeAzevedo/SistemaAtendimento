@@ -1,14 +1,18 @@
 using Microsoft.Data.SqlClient;
 using SistemaAtendimento.Database;
+using SistemaAtendimento.Model;
 using SistemaAtendimento.View;
 
 namespace SistemaAtendimento
 {
     public partial class FrmTelaPrincipal : Form
     {
-        public FrmTelaPrincipal()
+
+        private Usuarios _usuarioLogado;
+        public FrmTelaPrincipal(Usuarios usuario)
         {
             InitializeComponent();
+            _usuarioLogado = usuario;
         }
 
         private void btnConexao_Click(object sender, EventArgs e)
@@ -52,6 +56,12 @@ namespace SistemaAtendimento
 
         private void consultasToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            if (_usuarioLogado.Perfil != "admin")
+            {
+                MessageBox.Show("Você não tem permissão para acessar essa função.");
+                return;
+            }
+            
             FrmConsultaAtendimento frmConsultaAtendimento = new FrmConsultaAtendimento();
             frmConsultaAtendimento.Show();
         }
@@ -71,6 +81,12 @@ namespace SistemaAtendimento
         private void FrmTelaPrincipal_FormClosed(object sender, FormClosedEventArgs e)
         {
             Application.Exit();
+        }
+
+        private void FrmTelaPrincipal_Load(object sender, EventArgs e)
+        {
+            slblNome.Text = $"Usuário: {_usuarioLogado.Nome}";
+            slblPerfil.Text = $"Perfil: {_usuarioLogado.Perfil}";
         }
     }
 }
